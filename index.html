@@ -41,7 +41,7 @@
         .btn-primary { background: #312e81; color: white; border-radius: 8px; padding: 14px 24px; font-weight: 700; transition: all 0.2s; border: none; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
         .btn-primary:hover { background: #1e1b4b; transform: translateY(-2px); }
         .btn-outline { background: white; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px 24px; font-weight: 700; transition: all 0.2s; cursor: pointer; }
-        .btn-outline:hover { background: #f8fafc; border-color: #94a3b8; }
+        .btn-outline:hover { background: #f1f5f9; border-color: #94a3b8; }
     </style>
 </head>
 <body class="antialiased h-screen overflow-hidden flex">
@@ -88,7 +88,7 @@
             <!-- 1. HOME 대시보드 -->
             <section id="home" class="tab-content active max-w-4xl mx-auto">
                 <div class="mb-8">
-                    <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-xs">사용자 요청 100% 반영 업데이트 완료</span>
+                    <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-xs">자료실 백지 오류 완벽 해결</span>
                     <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-4 mb-3 tracking-tight">출제 원칙 기반 실전 대비</h2>
                     <p class="text-slate-600 font-medium">제시하신 문서와 서술형 모범 답안을 완벽히 이식하였습니다.</p>
                 </div>
@@ -120,7 +120,7 @@
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center shrink-0">2</span>
-                            <span><b>몽타주 3가지 정의:</b> 프랑스, 할리우드, 소비에트. 절대 길게 쓰지 말고 "각각 한 문장씩, 총 세 문장으로만" 작성할 것.</span>
+                            <span><b>몽타주의 세 가지 정의:</b> 프랑스, 할리우드, 소비에트. 절대 길게 쓰지 말고 "각각 한 문장씩, 총 세 문장으로만" 작성할 것.</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center shrink-0">3</span>
@@ -134,10 +134,10 @@
             <section id="library" class="tab-content max-w-5xl mx-auto">
                 <div class="mb-8 border-b border-slate-200 pb-4">
                     <h2 class="text-3xl font-black text-slate-900 tracking-tight">완벽 자료실 (요약본)</h2>
-                    <p class="text-slate-500 font-medium mt-2">제공해주신 텍스트 원본을 단 하나도 빠짐없이 100% 탑재했습니다.</p>
+                    <p class="text-slate-500 font-medium mt-2">제공해주신 모든 텍스트 원본을 단 하나도 빠짐없이 100% 탑재했습니다.</p>
                 </div>
-                <div id="library-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- JS로 렌더링 -->
+                <div id="library-list" class="space-y-12">
+                    <!-- JS로 렌더링 됩니다 -->
                 </div>
             </section>
 
@@ -270,10 +270,10 @@
         /* ==========================================
            1. 자료실 전용 데이터 (사용자 제공 텍스트 100% 매칭)
            ========================================== */
-        const libraryData = [
+        const libraryPart1Data = [
             { title: "1. 대상과 카메라 거리: 샷의 크기", items: [
                 { q: "공간의 전반적인 상황과 맥락을 한눈에 보여주기 위해 대상을 아주 작게 묘사하는 샷은?", a: "익스트림 롱 샷 (Extreme Long Shot)" },
-                { q: "인물의 전신과 배경이 함께 보이며, 인물이 공간 내 어디에 있는지 위치를 파악하게 해주는 샷은?", a: "롱 샷 (Long Shot)" },
+                { q: "인물의 전신과 배경이 함께 보이며, 인물이 공간 내 어디에 있는지 위치 파악하게 해주는 샷은?", a: "롱 샷 (Long Shot)" },
                 { q: "인물의 발끝부터 머리끝까지 화면에 꽉 차게 들어오게 촬영하는 샷은?", a: "풀 샷 (Full Shot)" },
                 { q: "인물의 허리나 가슴 위부터 촬영하며, 일상적인 대화 장면에 가장 많이 사용되는 샷은?", a: "미디엄 샷 (Medium Shot)" },
                 { q: "인물의 얼굴 등 특정 부위를 화면 가득 채워 감정이나 표정 변화를 강조하는 샷은?", a: "클로즈업 (Close-up)" },
@@ -317,6 +317,24 @@
             ]}
         ];
 
+        const essayData = [
+            {
+                title: "[서술형 1] 주어진 샷 분석 (37-39p)",
+                rules: "1. 의미 부여, 상상력, 해석 금지 (\"눈에 보이는 것만 적을 것\").\n2. 단어 나열 금지 (\"문장으로 분석을 적어볼 것\").\n3. 일관된 전개 기준 세우기 (\"인물 -> 배경 -> 카메라 -> 조명 순으로 묘사\").",
+                template: "\"이 샷은 중앙에 위치한 [나이대/성별]의 인물이 [의상 묘사]를 한 채 [특정 행동/표정]을 하고 있는 모습을 담고 있습니다. 인물의 뒤로는 [배경 묘사]가 보이며, 주변에는 [특정 소품]이 배치되어 있습니다. 카메라는 인물을 [클로즈업/미디엄/롱 샷] 사이즈로 담아내고 있으며, 앵글은 [아이 레벨/로우/하이] 앵글로 촬영되었습니다. 조명은 화면의 [좌/우/위]에서 주광이 들어와 인물의 [특정 부위]에 그림자를 만들고 있습니다.\""
+            },
+            {
+                title: "[서술형 2] 몽타주의 세 가지 정의 (77-81p)",
+                rules: "1. 길게 쓰지 말 것.\n2. \"각각 한 문장씩, 총 세 문장으로만 정의할 것\".",
+                template: "프랑스 영화에서 몽타주란 샷과 샷을 결합하는 단순한 편집의 조립 그 자체를 의미합니다. 미국(할리우드) 영화에서 몽타주란 내러티브 전개를 위해 시공간을 압축하거나 확장하여 보여주는 편집 시퀀스를 지칭합니다. 소비에트(러시아) 영화에서 몽타주란 독립된 샷들의 변증법적 충돌을 통해 관객의 마음속에 새롭고 혁명적인 의미를 창조해내는 것을 뜻합니다."
+            },
+            {
+                title: "[서술형 3] 편집 분석을 위한 상상력 연습 (92-93p)",
+                rules: "1. 상황(예: 정신적으로 혼란스러운 인물)에 이어붙일 샷 묘사하기 (교재 2A, 2B 형식).\n2. (핵심 감점 요인) 단순한 컷 묘사로 끝내지 말고, \"왜 그렇게 설정했는지에 대한 의도(이유)\"를 반드시 서술할 것.",
+                template: "[상황 제시] 텅 빈 방에 서서 창밖을 불안하게 바라보는 남자의 뒷모습.\n[답안] \"위의 샷에 이어질 다음 샷으로 '건물 외부에서 남자가 서 있는 창문을 올려다보는 매우 높은 로우 앵글의 익스트림 롱 샷'을 배치하겠습니다. 이렇게 샷을 편집한 의도(이유)는, 압도적으로 거대한 건물 벽면과 그 속에 점처럼 작게 고립된 남자의 모습을 극명하게 대조시켜, 주인공이 현재 겪고 있는 극심한 심리적 혼란과 세상에 대한 무기력함을 관객에게 시각적으로 극대화하여 전달하기 위함입니다.\""
+            }
+        ];
+
         /* ==========================================
            2. 양방향 문제 은행 DB (따옴표 오류 원천 차단)
            ========================================== */
@@ -336,7 +354,9 @@
                 { id:'m9', cat:'사운드', q:`'주관적 음향 (Subjective Sound)'이란 무엇인가?`, opts:['대사와 음악을 제외한 인공적, 자연적 효과음이다.','음량의 크기나 반사음 조절을 통해 사운드의 원근감을 표현하는 것이다.','인물이 극도로 집중하거나 혼몽할 때 주변 소리가 차단되는 등, 인물의 심리 상태를 반영하는 사운드이다.','특정 공간에 기본적으로 깔려 있는 미세한 백색소음이다.'], a:2, exp:`인물의 심리 상태나 인식을 반영하는 사운드입니다.` },
                 
                 // 공간 / 앵글 등
-                { id:'m10', cat:'공간', q:`프레임 밖으로 배제되어 상상을 유발하는 공간은?`, opts:['내화면 (On-screen space)','외화면 (Off-screen space)','아이 레벨 샷','클로즈업'], a:1, exp:`프레임 밖에 존재하는 공간을 외화면이라고 합니다.` }
+                { id:'m10', cat:'공간', q:`프레임 밖으로 배제되어 상상을 유발하는 공간은?`, opts:['내화면 (On-screen space)','외화면 (Off-screen space)','아이 레벨 샷','클로즈업'], a:1, exp:`프레임 밖에 존재하는 공간을 외화면이라고 합니다.` },
+                { id:'m11', cat:'편집', q:`앞 샷이 사라지며 다음 샷이 나타나, 두 이미지가 다중 노출처럼 겹쳐서 전환되는 기법은?`, opts:['페이드 인','페이드 아웃','아이리스 인','디졸브 (Dissolve)'], a:3, exp:`시간의 경과나 감정의 융합을 표현할 때 디졸브를 자주 사용합니다.` },
+                { id:'m12', cat:'편집', q:`앞 샷의 행동과 다음 샷의 행동을 부드럽게 이어붙이는 편집 기법은?`, opts:['동작의 일치','조형 일치','180도 체계','시선의 일치'], a:0, exp:`동작의 일치는 편집을 보이지 않게 만드는 연속 편집의 핵심입니다.` }
             ],
             short: [
                 { id:'s1', cat:'카메라 앵글', q:`카메라 렌즈를 피사체의 눈높이에 맞추어 가장 자연스럽게 담아내는 앵글은? (한글)`, a:['아이레벨샷','아이레벨 샷','아이 레벨 샷','아이레벨'], exp:`가장 자연스러운 아이 레벨 샷입니다.` },
@@ -412,22 +432,24 @@
             document.getElementById('main-scroll').scrollTo(0, 0);
         }
 
-        // --- 자료실 렌더링 ---
+        // --- 자료실 렌더링 (하얀 화면 버그 완전 해결) ---
         function renderLibrary() {
             const container = document.getElementById('library-list');
-            if(container.innerHTML !== '') return; 
+            if(container.children.length > 0) return; // 기존 주석 체크 버그 해결
             
-            let html = '';
-            libraryData.forEach(section => {
+            let html = `<h3 class="text-2xl font-black text-slate-800 mb-6 flex items-center gap-2"><span class="text-indigo-600">💡</span> Part 1. 객관식 & 단답형 완벽 대비</h3>`;
+            html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">`;
+            
+            libraryPart1Data.forEach(section => {
                 html += `
                     <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
-                        <h3 class="text-xl font-black text-indigo-800 mb-4 border-b border-slate-100 pb-3">${section.title}</h3>
+                        <h4 class="text-[1.1rem] font-black text-indigo-800 mb-4 border-b border-slate-100 pb-3">${section.title}</h4>
                         <ul class="space-y-4">
                 `;
                 section.items.forEach(item => {
                     html += `
                         <li class="flex flex-col gap-1.5">
-                            <span class="text-slate-500 text-[11px] font-bold bg-slate-100 w-max px-2 py-0.5 rounded tracking-wide">핵심 개념 Q&A</span>
+                            <span class="text-slate-500 text-[10px] font-bold bg-slate-100 w-max px-2 py-0.5 rounded tracking-wide">핵심 개념 Q&A</span>
                             <span class="text-slate-800 font-bold text-[0.95rem] leading-snug">Q. ${item.q}</span>
                             <span class="text-indigo-600 font-black text-[0.95rem] mt-1 pl-3 border-l-2 border-indigo-400">A. ${item.a}</span>
                         </li>
@@ -435,6 +457,30 @@
                 });
                 html += `</ul></div>`;
             });
+            html += `</div>`;
+
+            // 서술형 부분 렌더링
+            html += `<h3 class="text-2xl font-black text-slate-800 mb-4 flex items-center gap-2 pt-6 border-t-4 border-slate-800"><span class="text-rose-600">📝</span> Part 2. 서술형 완벽 대비 (교수님 룰 100% 적용)</h3>`;
+            html += `<p class="text-slate-600 font-medium mb-8 text-[0.95rem]">교수님께서 서술형에서 절대 하면 안 되는 것과 반드시 해야 하는 것을 명확히 짚어주셨습니다. 이 틀대로만 외우시면 무조건 만점입니다.</p>`;
+            html += `<div class="space-y-6">`;
+
+            essayData.forEach(essay => {
+                html += `
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                        <h4 class="text-xl font-black text-slate-800 mb-4">${essay.title}</h4>
+                        <div class="bg-rose-50 border border-rose-200 p-4 rounded-xl mb-4">
+                            <p class="font-bold text-rose-700 text-sm mb-2 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> 교수님 채점 규칙</p>
+                            <p class="text-[0.9rem] text-rose-900 leading-relaxed whitespace-pre-wrap font-medium">${essay.rules}</p>
+                        </div>
+                        <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-xl">
+                            <p class="font-bold text-indigo-700 text-sm mb-2 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 모범 답안 (템플릿)</p>
+                            <p class="text-[0.95rem] text-indigo-900 leading-relaxed whitespace-pre-wrap font-medium">${essay.template}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+
             container.innerHTML = html;
         }
 
@@ -614,7 +660,7 @@
                 return; 
             }
 
-            const res = `[이어질 샷의 묘사]\n${s1}\n\n[편집의 연출적 의도]\n${s2}`;
+            const res = `[상황 제시] 텅 빈 방에 서서 창밖을 불안하게 바라보는 남자의 뒷모습.\n[답안] 위의 샷에 이어질 다음 샷으로 ${s1} 이렇게 샷을 편집한 의도(이유)는, ${s2}`;
             document.getElementById('b-result').textContent = res;
             showToast('논리적 서술형 답안이 조립되었습니다!', 'success');
         }
