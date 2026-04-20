@@ -6,62 +6,48 @@
     <title>영화학개론 중간고사 마스터</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 구글 폰트 (Pretendard) */
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         
         body { 
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; 
-            background-color: #f8fafc; /* Slate 50 */
-            color: #0f172a; /* Slate 900 */
+            font-family: 'Pretendard', -apple-system, sans-serif; 
+            background-color: #f1f5f9; 
+            color: #0f172a; 
             word-break: keep-all; 
         }
         
-        /* 탭 전환 애니메이션 */
-        .tab-content { display: none; animation: fadeScale 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* 탭 애니메이션 */
+        .tab-content { display: none; animation: fadeIn 0.3s ease-out forwards; opacity: 0; }
         .tab-content.active { display: block; }
-        @keyframes fadeScale { 
-            from { opacity: 0; transform: scale(0.98) translateY(10px); } 
-            to { opacity: 1; transform: scale(1) translateY(0); } 
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 토스트 메시지 */
-        #toast-container { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
-        .toast { padding: 14px 24px; border-radius: 8px; color: white; font-weight: 700; font-size: 0.95rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); animation: slideUp 0.3s forwards, fadeOut 0.3s forwards 2.7s; display: flex; align-items: center; gap: 8px; }
-        .toast.success { background-color: #1e293b; color: #34d399; } 
-        .toast.error { background-color: #dc2626; }
-        .toast.info { background-color: #3b82f6; }
+        /* 토스트 알림 */
+        #toast-container { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+        .toast { padding: 12px 24px; border-radius: 8px; color: white; font-weight: 700; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); animation: slideUp 0.3s forwards, fadeOut 0.3s forwards 2.5s; display:flex; align-items:center; gap:8px;}
+        .toast.success { background-color: #10b981; } 
+        .toast.error { background-color: #ef4444; }
         @keyframes slideUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 
-        /* 커스텀 폼 컨트롤 */
+        /* UI 커스텀 */
         input[type="radio"]:checked + span { font-weight: 800; color: #4338ca; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         
-        /* 스크롤바 */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-        /* 네비게이션 & 버튼 테마 (Indigo & Slate) */
         .nav-btn.active { background-color: #e0e7ff; color: #3730a3; font-weight: 800; border-right: 4px solid #4f46e5; }
         .nav-btn.active svg { stroke: #4f46e5; }
-        .mobile-nav-btn.active { color: #3730a3; font-weight: 800;}
+        .mobile-nav-btn.active { color: #4f46e5; font-weight: 800; }
         .mobile-nav-btn.active svg { stroke: #4f46e5; }
 
-        .g-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; transition: box-shadow 0.2s; }
-        .g-card:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-        
-        .g-btn-primary { background: #312e81; color: white; border-radius: 8px; padding: 14px 24px; font-weight: 700; font-size: 1rem; transition: all 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .g-btn-primary:hover { background: #1e1b4b; transform: translateY(-2px); }
-        
-        .g-btn-outline { background: white; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px 24px; font-weight: 700; font-size: 1rem; transition: all 0.2s; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-        .g-btn-outline:hover { background: #f8fafc; border-color: #94a3b8; }
+        .btn-primary { background: #312e81; color: white; border-radius: 8px; padding: 14px 24px; font-weight: 700; transition: all 0.2s; border: none; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .btn-primary:hover { background: #1e1b4b; transform: translateY(-2px); }
+        .btn-outline { background: white; color: #334155; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px 24px; font-weight: 700; transition: all 0.2s; cursor: pointer; }
+        .btn-outline:hover { background: #f8fafc; border-color: #94a3b8; }
     </style>
 </head>
 <body class="antialiased h-screen overflow-hidden flex">
 
     <!-- PC 사이드바 -->
-    <aside class="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 h-full z-20 flex-shrink-0 shadow-sm">
+    <aside class="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 h-full z-20 shrink-0 shadow-sm">
         <div class="px-6 py-8 border-b border-slate-100">
             <h1 class="text-2xl font-black text-slate-800 flex items-center gap-2 tracking-tight">
                 <span class="text-indigo-600">🎬</span> 영화학개론
@@ -69,188 +55,170 @@
             <p class="text-indigo-500 text-[11px] mt-1.5 font-bold pl-8 tracking-wider">MID-TERM MASTER</p>
         </div>
         <div class="flex-1 overflow-y-auto py-4 space-y-1">
-            <button onclick="navigate('home')" class="nav-btn active w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-medium" data-target="home">
+            <button onclick="navigate('home')" class="nav-btn active w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-semibold" data-target="home">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> 대시보드
             </button>
-            <button onclick="navigate('library')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-medium" data-target="library">
+            <button onclick="navigate('library')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-semibold" data-target="library">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg> 완벽 자료실
             </button>
-            <button onclick="navigate('exam')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-medium bg-indigo-50/30" data-target="exam">
+            <button onclick="navigate('exam')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-semibold bg-indigo-50/50" data-target="exam">
                 <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg> <span class="text-indigo-800 font-bold">실전 모의고사</span>
             </button>
-            <button onclick="navigate('builder')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-medium" data-target="builder">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg> 서술형 마스터 빌더
+            <button onclick="navigate('builder')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-semibold" data-target="builder">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg> 서술형 3번 빌더
             </button>
             <hr class="my-4 border-slate-200 mx-6">
-            <button onclick="navigate('note')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-medium" data-target="note">
+            <button onclick="navigate('note')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-semibold" data-target="note">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> 약점 오답노트
             </button>
         </div>
     </aside>
 
     <!-- 우측 메인 영역 -->
-    <div class="flex-1 flex flex-col h-full overflow-hidden relative">
-        
-        <!-- 모바일 헤더 -->
-        <header class="md:hidden flex items-center justify-between px-5 py-4 bg-white border-b border-slate-200 z-10 flex-shrink-0">
+    <div class="flex-1 flex flex-col h-full relative">
+        <header class="md:hidden flex items-center justify-between px-5 py-4 bg-white border-b border-slate-200 z-10 flex-shrink-0 shadow-sm">
             <h1 class="text-lg font-black text-slate-800 flex items-center gap-2">
-                <span class="text-indigo-600">🎬</span> 영화학개론 마스터
+                <span class="text-indigo-600">🎬</span> 영화학개론 중간고사
             </h1>
         </header>
 
-        <!-- 스크롤 가능 컨텐츠 -->
+        <!-- 스크롤 컨텐츠 -->
         <main class="flex-1 overflow-y-auto p-4 md:p-8 pb-32 md:pb-12" id="main-scroll">
             
             <!-- 1. HOME 대시보드 -->
             <section id="home" class="tab-content active max-w-4xl mx-auto">
                 <div class="mb-8">
-                    <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-xs">전체 로직 검증 및 UI 최적화 완료</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-4 mb-3 tracking-tight">중간고사 출제 경향 분석</h2>
-                    <p class="text-slate-600 font-medium">교수님께서 제시하신 문서를 기반으로 100% 맞춤 제작되었습니다.</p>
+                    <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-xs">시스템 정상화 및 로직 완벽 검증</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-4 mb-3 tracking-tight">출제 원칙 기반 실전 대비</h2>
+                    <p class="text-slate-600 font-medium">교수님께서 제시하신 공식 문서를 100% 반영하여 양방향으로 훈련합니다.</p>
                 </div>
                 
-                <!-- 출제 원칙 배너 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-slate-900 rounded-2xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
-                        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-indigo-500 rounded-full opacity-20 blur-2xl"></div>
-                        <div class="relative z-10">
-                            <h3 class="text-xl font-bold text-indigo-400 mb-3 flex items-center gap-2">🔄 양방향 교차 학습</h3>
-                            <p class="text-slate-300 text-sm leading-relaxed">
-                                제공된 키워드를 바탕으로 <b>[개념 ➡ 용어]</b> 문제뿐만 아니라 <b>[용어 ➡ 개념]</b>을 묻는 문제를 교차로 출제합니다. 한 방향으로만 외우면 실전에서 막힐 수 있습니다.
-                            </p>
-                        </div>
+                    <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
+                        <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-2xl mb-4">🔄</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">양방향 교차 학습 체계</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            제공해주신 자료를 바탕으로 <b>[개념 ➡ 용어]</b>를 묻는 문제와, 보기에서 <b>[용어 ➡ 개념]</b>을 찾는 문제가 무작위로 교차 출제되어 맹점을 완벽히 보완합니다.
+                        </p>
                     </div>
-                    <div class="bg-indigo-900 rounded-2xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
-                        <div class="absolute bottom-0 right-0 -mb-4 -mr-4 w-32 h-32 bg-emerald-500 rounded-full opacity-20 blur-2xl"></div>
-                        <div class="relative z-10">
-                            <h3 class="text-xl font-bold text-emerald-400 mb-3 flex items-center gap-2">📝 서술형 다중 시나리오</h3>
-                            <p class="text-slate-300 text-sm leading-relaxed">
-                                서술 1번(샷 분석)과 3번(상상력)은 시험장에서 어떤 스틸컷이나 상황이 나올지 모릅니다. 이에 대비해 <b>총 3가지 이상의 각기 다른 시나리오</b>가 무작위로 제시됩니다.
-                            </p>
-                        </div>
+                    <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
+                        <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-2xl mb-4">✍️</div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">서술형 3문제 완벽 방어</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            서술형 1번(샷 묘사)과 3번(상상력)은 시험장에서 어떤 스틸컷이 나올지 모르므로, 각기 다른 <b>3가지 시나리오가 랜덤 출제</b>되도록 다중화했습니다.
+                        </p>
                     </div>
                 </div>
 
-                <!-- 서술형 3문제 절대 규칙 -->
-                <div class="g-card p-8 border-t-4 border-t-indigo-600">
-                    <h3 class="text-xl font-bold text-slate-800 mb-5 flex items-center gap-2">
-                        <span class="text-2xl">🚨</span> 교수님 서술형 3문제 채점 규칙
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-black flex items-center justify-center shrink-0">1</div>
-                            <div>
-                                <h4 class="font-bold text-slate-800 text-lg mb-1">주어진 샷 분석 (37-39p)</h4>
-                                <p class="text-slate-600 text-sm">의미 부여나 해석 절대 금지 ("눈에 보이는 것만 적을 것"). 단어 나열 금지. 인물 ➡ 배경 ➡ 카메라 ➡ 조명 순의 일관된 전개 권장.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-black flex items-center justify-center shrink-0">2</div>
-                            <div>
-                                <h4 class="font-bold text-slate-800 text-lg mb-1">몽타주의 세 가지 정의 (77-81p)</h4>
-                                <p class="text-slate-600 text-sm">프랑스, 미국(할리우드), 소비에트(러시아) 세 가지. 길게 쓰지 말고 <b>"각각 한 문장씩, 총 세 문장"</b>으로만 작성할 것. (절대 규칙)</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-black flex items-center justify-center shrink-0">3</div>
-                            <div>
-                                <h4 class="font-bold text-slate-800 text-lg mb-1">편집 상상력 연습 (92-93p)</h4>
-                                <p class="text-slate-600 text-sm">제시된 상황에 맞게 교재 2A, 2B처럼 샷의 종류(거리, 앵글)를 명시하고, <b>반드시 "왜 그렇게 설정했는지에 대한 의도(이유)"를 서술할 것.</b></p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-slate-900 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500 rounded-full opacity-20 blur-2xl"></div>
+                    <h3 class="text-xl font-black text-indigo-300 mb-5 relative z-10">🚨 서술형 100% 만점 규칙 (교수님 채점 기준)</h3>
+                    <ul class="space-y-4 text-sm font-medium relative z-10 text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <span class="bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center shrink-0">1</span>
+                            <span><b>주어진 샷 분석:</b> 의미 부여나 해석 절대 금지. 눈에 보이는 팩트만 완전한 문장으로 작성. (인물 ➡ 배경 ➡ 카메라 ➡ 조명 순서 권장)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center shrink-0">2</span>
+                            <span><b>몽타주 3가지 정의:</b> 프랑스, 할리우드, 소비에트. 절대 길게 쓰지 말고 "각각 한 문장씩, 총 세 문장으로만" 작성할 것.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center shrink-0">3</span>
+                            <span><b>편집 상상력 연습:</b> 이어붙일 샷(거리,앵글)을 교재처럼 명시하고, <b>반드시 "왜 그렇게 설정했는지에 대한 의도(이유)"를 서술할 것.</b></span>
+                        </li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- 2. CHEAT SHEET (완벽 자료실) -->
+            <!-- 2. 완벽 자료실 (Library) -->
             <section id="library" class="tab-content max-w-5xl mx-auto">
                 <div class="mb-8 border-b border-slate-200 pb-4">
-                    <h2 class="text-3xl font-black text-slate-900 tracking-tight">완벽 자료실 (핵심 요약)</h2>
-                    <p class="text-slate-500 font-medium mt-2">제공된 공식 문서 기준, 시험에 출제되는 모든 1:1 매칭 데이터입니다.</p>
+                    <h2 class="text-3xl font-black text-slate-900 tracking-tight">완벽 자료실 (요약본)</h2>
+                    <p class="text-slate-500 font-medium mt-2">제공해주신 모든 문항 텍스트를 1:1 매칭 데이터로 재구성했습니다.</p>
                 </div>
                 <div id="library-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- JS로 렌더링 -->
                 </div>
             </section>
 
-            <!-- 3. EXAM MODE (실전 모의고사) -->
+            <!-- 3. 실전 모의고사 -->
             <section id="exam" class="tab-content max-w-4xl mx-auto h-full">
                 <!-- 진입 화면 -->
                 <div id="exam-intro" class="flex flex-col items-center justify-center py-20 fade-in">
-                    <div class="inline-block bg-indigo-100 text-indigo-800 px-4 py-1.5 rounded-full font-black text-sm mb-5">실전 3+3+3 법칙 적용</div>
-                    <h2 class="text-4xl font-black text-slate-900 mb-5 text-center">실전 모의고사</h2>
+                    <div class="inline-block bg-indigo-100 text-indigo-800 px-4 py-1.5 rounded-full font-black text-sm mb-5">실제 시험과 완벽히 동일한 환경</div>
+                    <h2 class="text-4xl font-black text-slate-900 mb-5 text-center tracking-tight">실전 모의고사 (3+3+3)</h2>
                     <p class="text-slate-600 mb-10 text-lg leading-relaxed text-center font-medium">
                         객관식 3문제, 주관식(단답) 3문제, 서술형 3문제가<br class="hidden md:block">
-                        방대한 양방향 데이터베이스에서 무작위로 섞여 출제됩니다.
+                        양방향 데이터베이스에서 무작위로 섞여 무한 생성됩니다.
                     </p>
-                    <button onclick="startExam('normal')" class="g-btn-primary py-5 px-12 text-xl shadow-lg w-full md:w-auto hover:scale-105">
+                    <button onclick="startExam('normal')" class="btn-primary py-5 px-12 text-xl shadow-lg w-full md:w-auto hover:-translate-y-1">
                         📝 새로운 시험지 발급받기
                     </button>
-                    <button onclick="startExam('review')" id="review-exam-btn" class="mt-5 w-full md:w-auto bg-rose-500 hover:bg-rose-600 text-white font-bold py-4 px-10 rounded-lg shadow-lg transition-transform hover:scale-105 hidden">
+                    <button onclick="startExam('review')" id="review-exam-btn" class="mt-5 w-full md:w-auto bg-rose-500 hover:bg-rose-600 text-white font-bold py-4 px-10 rounded-lg shadow-lg transition-transform hover:-translate-y-1 hidden">
                         🚨 오답 노트만 다시 풀기
                     </button>
                 </div>
 
                 <!-- 시험지 화면 -->
-                <div id="exam-paper" class="hidden pb-20">
-                    <div class="g-card p-6 mb-8 border-t-8 border-t-indigo-800">
+                <div id="exam-paper" class="hidden pb-20 fade-in">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 mb-8 border-t-8 border-t-indigo-800">
                         <h2 class="text-2xl font-black text-slate-900 border-b border-slate-100 pb-4 mb-4">영화학개론 중간고사</h2>
                         <div class="flex justify-between text-sm text-slate-600 font-bold">
                             <span>과목: 영상영화학 전공필수</span>
-                            <span>총 문항: <span id="exam-total-count" class="text-indigo-600">9</span>문항</span>
+                            <span>총 문항: <span id="exam-total-count" class="text-indigo-600 font-black">9</span>문항</span>
                         </div>
                     </div>
                     
                     <div id="exam-questions" class="space-y-8"></div>
                     
                     <div class="mt-12 text-center pt-8 border-t border-slate-200">
-                        <button onclick="submitExam()" id="submit-exam-btn" class="g-btn-primary bg-slate-900 hover:bg-black py-5 px-16 text-xl shadow-2xl w-full md:w-auto">
-                            시험지 제출 및 채점하기
+                        <button onclick="submitExam()" id="submit-exam-btn" class="btn-primary bg-slate-900 hover:bg-black py-5 px-16 text-xl shadow-xl w-full md:w-auto hover:-translate-y-1">
+                            시험지 제출 및 자가 채점하기
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. 서술형 3번 빌더 -->
+            <!-- 4. 서술형 빌더 -->
             <section id="builder" class="tab-content max-w-5xl mx-auto">
                 <div class="text-center mb-10">
                     <span class="bg-indigo-100 text-indigo-800 font-black px-3 py-1 rounded-full text-xs mb-3 inline-block">논리적 글쓰기 훈련</span>
                     <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-3 tracking-tight">서술형 3번 마스터 빌더</h2>
-                    <p class="text-slate-600 font-medium">가장 많은 감점이 발생하는 '편집 상상력' 문제를 2단계 룰에 맞춰 조립해 봅니다.</p>
+                    <p class="text-slate-600 font-medium">감점이 가장 많은 '편집 상상력' 문제를 2단계 룰에 맞춰 정확히 조립하는 연습입니다.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                     <div class="space-y-6">
-                        <div class="bg-slate-800 text-white p-5 rounded-xl shadow-md">
-                            <p class="text-xs font-bold text-indigo-300 mb-1">상황 제시 (예시)</p>
-                            <p class="text-[1.05rem] font-medium leading-relaxed">"텅 빈 방에 서서 창밖을 멍하니, 불안하게 바라보는 남자의 뒷모습 샷"</p>
+                        <div class="bg-slate-800 text-white p-6 rounded-xl shadow-md">
+                            <p class="text-xs font-bold text-indigo-400 mb-2 tracking-wider uppercase">상황 제시 (예시)</p>
+                            <p class="text-[1.05rem] font-medium leading-relaxed">"텅 빈 방에 서서 창밖을 불안하게 바라보는 남자의 뒷모습 샷"</p>
                         </div>
-                        <div class="g-card p-6 border-t-4 border-t-indigo-500">
-                            <h3 class="font-black text-slate-800 mb-2 flex items-center gap-2"><span class="bg-indigo-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span> 이어붙일 샷 설정 (교재 2A 형식)</h3>
+                        <div class="bg-white p-6 border border-slate-200 rounded-xl shadow-sm">
+                            <h3 class="font-black text-slate-800 mb-2 flex items-center gap-2"><span class="bg-indigo-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span> 이어붙일 샷 설정</h3>
                             <p class="text-xs text-slate-500 mb-3 font-bold">카메라 거리(크기)와 앵글을 명확히 명시하세요.</p>
-                            <textarea id="b-step1" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-3 text-[0.95rem] font-medium focus:outline-none focus:border-indigo-500 h-28 resize-none" placeholder="예: 위의 샷에 이어질 다음 샷으로 '건물 외부에서 남자가 서 있는 창문을 올려다보는 매우 높은 로우 앵글의 익스트림 롱 샷'을 연결하겠습니다."></textarea>
+                            <textarea id="b-step1" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-4 text-[0.95rem] font-medium focus:outline-none focus:border-indigo-500 h-28 resize-none" placeholder="예: 위의 샷에 이어질 다음 샷으로 '건물 외부에서 남자가 서 있는 창문을 올려다보는 매우 높은 로우 앵글의 익스트림 롱 샷'을 배치하겠습니다."></textarea>
                         </div>
-                        <div class="g-card p-6 border-t-4 border-t-indigo-500">
+                        <div class="bg-white p-6 border border-slate-200 rounded-xl shadow-sm">
                             <h3 class="font-black text-slate-800 mb-2 flex items-center gap-2"><span class="bg-indigo-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span> 연출적 의도 (핵심 감점 방어)</h3>
-                            <p class="text-xs text-slate-500 mb-3 font-bold">왜 그 샷을 붙였는지, 두 샷의 대조를 통해 어떤 심리를 표현하려 했는지 서술하세요.</p>
-                            <textarea id="b-step2" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-3 text-[0.95rem] font-medium focus:outline-none focus:border-indigo-500 h-32 resize-none" placeholder="예: 이렇게 샷을 편집한 의도(이유)는, 압도적으로 거대한 건물 벽면과 그 속에 점처럼 작게 고립된 남자의 모습을 극명하게 대조시켜, 주인공이 겪고 있는 극심한 심리적 혼란과 세상에 대한 무기력함을 관객에게 시각적으로 전달하기 위함입니다."></textarea>
+                            <p class="text-xs text-slate-500 mb-3 font-bold">왜 그 샷을 붙였는지, 의도와 이유를 반드시 서술하세요.</p>
+                            <textarea id="b-step2" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-4 text-[0.95rem] font-medium focus:outline-none focus:border-indigo-500 h-32 resize-none" placeholder="예: 이렇게 샷을 편집한 의도(이유)는, 거대한 건물 벽면과 그 속에 고립된 남자의 모습을 대조시켜 주인공의 심리적 혼란과 무기력함을 극대화하기 위함입니다."></textarea>
                         </div>
-                        <button onclick="buildEssay3()" class="g-btn-primary w-full py-4 text-lg">답안 하나로 병합하기</button>
+                        <button onclick="buildEssay3()" class="btn-primary w-full py-4 text-lg">답안 하나로 병합하기</button>
                     </div>
 
-                    <div class="g-card p-6 lg:p-8 bg-slate-900 text-slate-200 sticky top-4 h-[600px] flex flex-col">
-                        <h3 class="text-xl font-black text-white mb-4 border-b border-slate-700 pb-3 flex items-center gap-2"><span class="text-emerald-400">📝</span> 완성된 나의 답안</h3>
+                    <div class="bg-slate-900 p-6 lg:p-8 rounded-xl shadow-xl flex flex-col h-[600px] sticky top-4">
+                        <h3 class="text-xl font-black text-white mb-4 border-b border-slate-700 pb-4 flex items-center gap-2"><span class="text-emerald-400">📝</span> 완성된 모범 답안</h3>
                         <div id="b-result" class="flex-1 overflow-y-auto whitespace-pre-wrap leading-[1.8] text-[0.95rem] p-2 text-slate-300 font-medium">
                             좌측의 1단계와 2단계를 작성하고 '병합하기' 버튼을 누르면 이 곳에 논리적인 문장으로 완성된 서술형 답안이 생성됩니다.
                         </div>
                         <div class="mt-4 pt-4 border-t border-slate-700 text-right">
-                            <button onclick="copyBuilderResult()" class="g-btn-outline bg-slate-800 text-white border-slate-600 hover:bg-slate-700">답안 텍스트 복사</button>
+                            <button onclick="copyBuilderResult()" class="btn-outline bg-slate-800 text-white border-slate-600 hover:bg-slate-700 hover:text-white">텍스트 복사</button>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 5. INCORRECT NOTE -->
+            <!-- 5. 약점 오답노트 -->
             <section id="note" class="tab-content max-w-4xl mx-auto">
                 <div class="mb-8 border-b border-slate-200 pb-4 flex justify-between items-end">
                     <div>
@@ -260,12 +228,12 @@
                         <p class="text-slate-500 font-medium mt-2">틀린 문제를 100% 마스터할 때까지 반복하세요.</p>
                     </div>
                     <div class="text-right">
-                        <span class="bg-rose-100 text-rose-700 px-4 py-2 rounded-lg font-black text-lg shadow-sm">누적 오답: <span id="note-count">0</span>개</span>
+                        <span class="bg-rose-100 text-rose-700 px-4 py-2 rounded-lg font-black text-lg shadow-sm border border-rose-200">누적 오답: <span id="note-count">0</span>개</span>
                     </div>
                 </div>
                 
-                <div class="g-card flex flex-col min-h-[50vh] overflow-hidden bg-slate-50">
-                    <div id="note-list" class="p-6 space-y-4 overflow-y-auto flex-1"></div>
+                <div class="flex flex-col min-h-[50vh] overflow-hidden">
+                    <div id="note-list" class="space-y-4 overflow-y-auto flex-1 pb-10"></div>
                 </div>
             </section>
         </main>
@@ -300,10 +268,10 @@
 
     <script>
         /* ==========================================
-           1. 자료실 전용 데이터 (1:1 매칭용)
+           1. 자료실 전용 데이터 (제공된 텍스트 100% 반영)
            ========================================== */
         const libraryData = [
-            { title: "1. 샷의 크기 (대상과 카메라 거리)", items: [
+            { title: "1. 대상과 카메라 거리: 샷의 크기", items: [
                 { q: "공간의 전반적인 상황과 맥락을 한눈에 보여주기 위해 대상을 아주 작게 묘사하는 샷은?", a: "익스트림 롱 샷 (Extreme Long Shot)" },
                 { q: "인물의 전신과 배경이 함께 보이며, 인물이 공간 내 어디에 있는지 위치를 파악하게 해주는 샷은?", a: "롱 샷 (Long Shot)" },
                 { q: "인물의 발끝부터 머리끝까지 화면에 꽉 차게 들어오게 촬영하는 샷은?", a: "풀 샷 (Full Shot)" },
@@ -317,7 +285,7 @@
                 { q: "피사체를 위에서 아래로 내려다보며 촬영하여 대상을 작고 연약하게 보이게 하는 앵글은?", a: "하이 앵글 (High Angle)" },
                 { q: "새가 하늘에서 땅을 보듯, 피사체의 수직 위에서 완전히 내려다보는 앵글은?", a: "버즈아이 샷 (Bird's-eye Shot)" }
             ]},
-            { title: "3. 카메라 움직임과 공간", items: [
+            { title: "3. 카메라 움직임의 유형 및 공간", items: [
                 { q: "카메라의 축은 고정된 상태에서 렌즈가 고개를 돌리듯 '좌우'로 움직이는 기법은?", a: "팬 / 패닝 (Pan / Panning)" },
                 { q: "카메라의 축은 고정된 상태에서 렌즈가 '상하'로 끄덕이듯 움직이는 기법은?", a: "틸트 / 틸팅 (Tilt / Tilting)" },
                 { q: "카메라 자체가 바닥과 평행하게 물리적으로 이동하며 공간을 관통하여 깊이감을 창조하는 샷은?", a: "트래킹 샷 (Tracking Shot)" },
@@ -343,11 +311,11 @@
                 { q: "음원에서 귀나 마이크로 직접 곧바로 전달되는 소리는?", a: "직접 음향 (Direct Sound)" },
                 { q: "공간의 벽이나 천장에 부딪혀 튕겨 나오는 소리로 공간감을 주는 소리는?", a: "반사 음향 (Reflected Sound)" },
                 { q: "대사와 음악을 제외한 인공적/자연적 효과음(총소리 등)은?", a: "음향 효과 (Sound Effect)" },
-                { q: "특정 공간에 기본적으로 깔려 있는 미세한 백색소음(룸 톤)은?", a: "배경 음향 / 앰비언트 사운드 (Ambient Sound)" },
+                { q: "특정 공간에 기본적으로 깔려 있는 미세한 백색소음(룸 톤)은?", a: "배경 음향 / 앰비언트 사운드 (Ambient Sound / Room tone)" },
                 { q: "음량의 크기나 반사음 조절을 통해 사운드의 원근감과 거리감을 표현하는 기법은?", a: "음향 원근법 (Sound Perspective)" },
                 { q: "인물이 무언가에 극도로 집중하거나 혼몽할 때 주변 소리가 차단되는 등, 인물의 심리 상태를 반영하는 사운드는?", a: "주관적 음향 (Subjective Sound)" }
             ]},
-            { title: "6. 연속 편집 및 몽타주", items: [
+            { title: "6. 편집 관련 키워드", items: [
                 { q: "연속 편집 중 앞 샷의 행동과 다음 샷의 행동을 부드럽게 이어붙이는 편집은?", a: "동작의 일치 (Match on action)" },
                 { q: "인물이 프레임 밖을 바라보는 샷 다음에 그 대상(물건/사람)을 보여주는 샷을 붙이는 것은?", a: "시선의 일치 / 눈길-대상 일치 (Eyeline match)" },
                 { q: "뼈다귀 형태에서 우주선 형태로 바뀌듯, 시각적 형태나 색채의 유사성을 이용한 편집은?", a: "조형 일치 (Graphic match)" },
@@ -360,37 +328,37 @@
         ];
 
         /* ==========================================
-           2. 양방향 실전 문제 은행 (DB)
+           2. 양방향 실전 문제 은행 (DB) - 따옴표 오류 100% 제거
            ========================================== */
         const examDB = {
             mcq: [
                 // 개념 -> 용어
-                { id:'m1', cat:'샷의 크기', q:'공간의 전반적인 상황과 맥락을 한눈에 보여주기 위해 대상을 아주 작게 묘사하는 샷은?', opts:['롱 샷','풀 샷','익스트림 롱 샷','미디엄 샷'], a:2, exp:'배경이 압도적으로 강조되어 인물이 점처럼 보입니다.' },
-                { id:'m2', cat:'카메라 앵글', q:'피사체를 아래에서 위로 올려다보며 촬영하여 대상을 거대하거나 위협적으로 보이게 하는 앵글은?', opts:['하이 앵글','아이 레벨 샷','버즈아이 샷','로우 앵글'], a:3, exp:'아래에서 위로 보는 것은 로우 앵글, 위에서 아래로 내려다보는 것은 하이 앵글입니다.' },
-                { id:'m3', cat:'카메라 움직임', q:'카메라 자체가 바닥과 평행하게 물리적으로 이동하며 공간을 관통하여 깊이감을 창조하는 샷은?', opts:['팬(Pan)','트래킹 샷(Tracking Shot)','줌(Zoom)','틸트(Tilt)'], a:1, exp:'줌(Zoom)과 대비되는 진짜 물리적 이동 샷입니다.' },
-                { id:'m4', cat:'조명', q:'피사체 뒤에서 빛을 비추어 윤곽선을 살리고 배경과 분리시키는 조명은?', opts:['주광(Key Light)','보조광(Fill Light)','역광(Backlight)','하이키 조명'], a:2, exp:'역광은 대상을 배경으로부터 돋보이게 입체감을 부여합니다.' },
-                { id:'m5', cat:'사운드', q:'이야기 세계 외부에서 들려와 관객만 들을 수 있는 소리(예: 스코어 배경음악, 전지적 해설)는?', opts:['내재적 사운드','음향 효과','반사 음향','외재적 사운드'], a:3, exp:'등장인물이 들을 수 없는 이야기 밖의 소리입니다.' },
-                { id:'m6', cat:'편집', q:'인물이 프레임 밖을 바라보는 샷 다음에 그 대상(물건/사람)을 보여주는 샷을 붙이는 것은?', opts:['동작의 일치','조형 일치','시선의 일치 (Eyeline match)','180도 체계'], a:2, exp:'바라보는 행위와 대상을 논리적으로 연결합니다.' },
+                { id:'m1', cat:'샷의 크기', q:`공간의 전반적인 상황과 맥락을 한눈에 보여주기 위해 대상을 아주 작게 묘사하는 샷은?`, opts:['롱 샷','풀 샷','익스트림 롱 샷','미디엄 샷'], a:2, exp:`배경이 압도적으로 강조되어 인물이 점처럼 보입니다.` },
+                { id:'m2', cat:'카메라 앵글', q:`피사체를 아래에서 위로 올려다보며 촬영하여 대상을 거대하거나 위협적으로 보이게 하는 앵글은?`, opts:['하이 앵글','아이 레벨 샷','버즈아이 샷','로우 앵글'], a:3, exp:`아래에서 위로 보는 것은 로우 앵글, 위에서 아래로 내려다보는 것은 하이 앵글입니다.` },
+                { id:'m3', cat:'카메라 움직임', q:`카메라 자체가 바닥과 평행하게 물리적으로 이동하며 공간을 관통하여 깊이감을 창조하는 샷은?`, opts:['팬(Pan)','트래킹 샷(Tracking Shot)','줌(Zoom)','틸트(Tilt)'], a:1, exp:`줌(Zoom)과 대비되는 진짜 물리적 이동 샷입니다.` },
+                { id:'m4', cat:'조명', q:`피사체 뒤에서 빛을 비추어 윤곽선을 살리고 배경과 분리시키는 조명은?`, opts:['주광(Key Light)','보조광(Fill Light)','역광(Backlight)','하이키 조명'], a:2, exp:`역광은 대상을 배경으로부터 돋보이게 입체감을 부여합니다.` },
+                { id:'m5', cat:'사운드', q:`이야기 세계 외부에서 들려와 관객만 들을 수 있는 소리(예: 스코어 배경음악, 전지적 해설)는?`, opts:['내재적 사운드','음향 효과','반사 음향','외재적 사운드'], a:3, exp:`등장인물이 들을 수 없는 이야기 밖의 소리입니다.` },
+                { id:'m6', cat:'편집', q:`인물이 프레임 밖을 바라보는 샷 다음에 그 대상(물건/사람)을 보여주는 샷을 붙이는 것은?`, opts:['동작의 일치','조형 일치','시선의 일치(Eyeline match)','180도 체계'], a:2, exp:`바라보는 행위와 대상을 논리적으로 연결합니다.` },
                 
                 // 용어 -> 개념 (설명을 주고 고르기)
-                { id:'m7', cat:'샷의 크기', q:`'클로즈업(Close-up)'의 주된 목적으로 가장 적절한 것은?`, opts:['공간의 지리적 맥락을 파악하게 한다.','인물의 얼굴 등 특정 부위를 가득 채워 감정이나 표정 변화를 강조한다.','인물의 발끝부터 머리끝까지 움직임을 보여준다.','일상적인 대화 장면에 가장 자연스럽게 사용된다.'], a:1, exp:'특정 부위를 확대하여 관객의 시선을 집중시킵니다.' },
-                { id:'m8', cat:'조명', q:`'주광(Key Light)'에 대한 설명으로 올바른 것은?`, opts:['피사체를 비추는 가장 주된 광원으로 강한 그림자를 형성한다.','그림자를 부드럽게 완화해준다.','피사체의 윤곽선을 살려 배경과 분리시킨다.','화면 전체를 어둡고 무섭게 만든다.'], a:0, exp:'빛의 근원이자 그림자를 필연적으로 생성하는 핵심 조명입니다.' },
-                { id:'m9', cat:'카메라 움직임', q:`'줌(Zoom)' 기법에 대한 설명으로 올바른 것은?`, opts:['카메라 자체가 물리적으로 앞뒤로 이동한다.','상하좌우 자유롭게 지지대를 이용해 날아다닌다.','카메라는 고정되어 있으나 가변 초점 렌즈를 이용해 다가가거나 멀어지는 듯한 가짜 움직임을 준다.','인물의 시선을 따라 카메라가 물리적으로 회전한다.'], a:2, exp:'트래킹과 달리 렌즈만 조작하여 공간을 압축(평면화)시킵니다.' },
-                { id:'m10', cat:'사운드', q:`'주관적 음향(Subjective Sound)'이란 무엇인가?`, opts:['장면의 환경에서 들리는 배경 소음이다.','대사와 음악을 제외한 인공적 효과음이다.','음량 조절로 사운드의 원근감을 표현하는 것이다.','인물이 무언가에 극도로 집중할 때 주변 소리가 차단되는 등, 인물의 심리 상태를 반영하는 사운드이다.'], a:3, exp:'객관적 현장음이 아닌 인물의 내면 상태를 들려주는 기법입니다.' },
+                { id:'m7', cat:'샷의 크기', q:`'클로즈업(Close-up)'의 주된 목적으로 가장 적절한 것은?`, opts:['공간의 지리적 맥락을 파악하게 한다.','인물의 얼굴 등 특정 부위를 가득 채워 감정이나 표정 변화를 강조한다.','인물의 발끝부터 머리끝까지 움직임을 보여준다.','일상적인 대화 장면에 가장 자연스럽게 사용된다.'], a:1, exp:`특정 부위를 확대하여 관객의 시선을 집중시킵니다.` },
+                { id:'m8', cat:'조명', q:`'주광(Key Light)'에 대한 설명으로 올바른 것은?`, opts:['피사체를 비추는 가장 주된 광원으로 강한 그림자를 형성한다.','그림자를 부드럽게 완화해준다.','피사체의 윤곽선을 살려 배경과 분리시킨다.','화면 전체를 어둡고 무섭게 만든다.'], a:0, exp:`빛의 근원이자 그림자를 필연적으로 생성하는 핵심 조명입니다.` },
+                { id:'m9', cat:'카메라 움직임', q:`'줌(Zoom)' 기법에 대한 설명으로 올바른 것은?`, opts:['카메라 자체가 물리적으로 앞뒤로 이동한다.','상하좌우 자유롭게 지지대를 이용해 날아다닌다.','카메라는 고정되어 있으나 가변 초점 렌즈를 이용해 다가가거나 멀어지는 듯한 가짜 움직임을 준다.','인물의 시선을 따라 카메라가 물리적으로 회전한다.'], a:2, exp:`트래킹과 달리 렌즈만 조작하여 공간을 압축(평면화)시킵니다.` },
+                { id:'m10', cat:'사운드', q:`'주관적 음향(Subjective Sound)'이란 무엇인가?`, opts:['장면의 환경에서 들리는 배경 소음이다.','대사와 음악을 제외한 인공적 효과음이다.','음량 조절로 사운드의 원근감을 표현하는 것이다.','인물이 무언가에 극도로 집중할 때 주변 소리가 차단되는 등, 인물의 심리 상태를 반영하는 사운드이다.'], a:3, exp:`객관적 현장음이 아닌 인물의 내면 상태를 들려주는 기법입니다.` },
                 
                 // 상대적 차이 비교 (교수님 강조 포인트)
-                { id:'m11', cat:'편집', q:`'교차 편집'과 '평행 편집'의 차이점으로 가장 올바른 것은?`, opts:['교차 편집은 동일한 시간대(동시성)의 사건을 번갈아 보여주고, 평행 편집은 서로 다른 시간대의 사건까지 연관성을 지어 보여준다.','교차 편집은 공간이 같고, 평행 편집은 공간이 다르다.','교차 편집은 부드럽게 이어지고, 평행 편집은 거칠게 끊긴다.','교차 편집은 사운드를 쓰고, 평행 편집은 사운드를 쓰지 않는다.'], a:0, exp:'동시성의 유무가 두 편집 기법을 구분하는 핵심입니다.' },
-                { id:'m12', cat:'조명', q:`'하이키 조명'과 '로우키 조명'의 차이로 적절한 것은?`, opts:['하이키는 인공광이고 로우키는 자연광이다.','하이키는 그림자가 강해 스릴러에 쓰이고, 로우키는 밝고 화사해 코미디에 쓰인다.','하이키는 그림자가 거의 없어 밝고 화사하며, 로우키는 명암 대비가 강하고 짙은 그림자를 많이 사용하여 긴장감을 준다.','하이키는 메인 조명이고, 로우키는 보조 조명이다.'], a:2, exp:'보조광의 비율에 따라 명암 대비(콘트라스트)가 결정됩니다.' }
+                { id:'m11', cat:'편집', q:`'교차 편집'과 '평행 편집'의 차이점으로 가장 올바른 것은?`, opts:['교차 편집은 동일한 시간대(동시성)의 사건을 번갈아 보여주고, 평행 편집은 서로 다른 시간대의 사건까지 연관성을 지어 보여준다.','교차 편집은 공간이 같고, 평행 편집은 공간이 다르다.','교차 편집은 부드럽게 이어지고, 평행 편집은 거칠게 끊긴다.','교차 편집은 사운드를 쓰고, 평행 편집은 사운드를 쓰지 않는다.'], a:0, exp:`동시성의 유무가 두 편집 기법을 구분하는 핵심입니다.` },
+                { id:'m12', cat:'조명', q:`'하이키 조명'과 '로우키 조명'의 차이로 적절한 것은?`, opts:['하이키는 인공광이고 로우키는 자연광이다.','하이키는 그림자가 강해 스릴러에 쓰이고, 로우키는 밝고 화사해 코미디에 쓰인다.','하이키는 그림자가 거의 없어 밝고 화사하며, 로우키는 명암 대비가 강하고 짙은 그림자를 많이 사용하여 긴장감을 준다.','하이키는 메인 조명이고, 로우키는 보조 조명이다.'], a:2, exp:`보조광의 비율에 따라 명암 대비(콘트라스트)가 결정됩니다.` }
             ],
             short: [
-                { id:'s1', cat:'카메라 앵글', q:`카메라 렌즈를 피사체의 눈높이에 맞추어 가장 자연스럽게 담아내는 앵글은? (띄어쓰기 무관)`, a:['아이레벨','아이레벨샷','아이 레벨 샷','eye level'], exp:'가장 일상적이고 객관적인 시점을 제공합니다.' },
-                { id:'s2', cat:'편집', q:`카메라가 인물 사이의 가상의 선을 넘지 않도록 하여 관객의 공간적 혼란(좌우반전)을 막는 체계는? (숫자 포함 5글자)`, a:['180도체계','180도 체계','180도규칙','180도 규칙'], exp:'투명한 연속 편집을 위한 핵심 규칙입니다.' },
-                { id:'s3', cat:'편집', q:`연속 편집 중 앞 샷의 행동(예: 문 손잡이 잡기)과 다음 샷의 행동(예: 문 열고 들어오기)을 부드럽게 이어붙이는 편집은? (OO의 일치)`, a:['동작의일치','동작의 일치','행동의일치'], exp:'동작이 물 흐르듯 이어지게 만들어 편집을 인지하지 못하게 합니다.' },
-                { id:'s4', cat:'카메라 움직임', q:`카메라의 축은 고정된 상태에서 렌즈가 '좌우'로 고개를 돌리듯 움직이는 기법은?`, a:['팬','패닝','pan','panning'], exp:'상하로 움직이는 것은 틸트(Tilt)입니다.' },
-                { id:'s5', cat:'화면 전환', q:`앞 샷이 사라지며 다음 샷이 나타나, 두 이미지가 다중 노출처럼 겹쳐서 전환되는 기법은?`, a:['디졸브','dissolve','디졸브 기법'], exp:'시간의 경과나 감정의 융합을 표현할 때 쓰입니다.' },
-                { id:'s6', cat:'사운드', q:`[빈칸 채우기] 음량의 크기나 반사음 조절을 통해 사운드의 원근감과 거리감을 표현하는 기법을 음향 OOO (이)라고 한다.`, a:['원근법'], exp:'직접음과 반사음의 비율로 소리의 거리를 지각하게 합니다.' },
-                { id:'s7', cat:'카메라 움직임', q:`[빈칸 채우기] 촬영자가 장비를 몸에 착용하여 흔들림 없이 부드럽게 이동하는 기법은 OOOO 이고, 직접 손에 들고 찍어 불안정한 느낌을 주는 것은 핸드헬드이다.`, a:['스테디캠','스테디 캠','steadicam'], exp:'스테디캠은 유려하고 안정적인 이동을 가능하게 합니다.' },
-                { id:'s8', cat:'사운드', q:`이야기 세계 내부에서 발생해 극 중 등장인물들도 들을 수 있는 소리를 무슨 사운드라고 하는가?`, a:['내재적사운드','내재적 사운드','다이제틱','다이제틱사운드','다이제틱 사운드'], exp:'이야기 세계(Diegesis) 내부에 음원이 존재하는 사운드입니다.' }
+                { id:'s1', cat:'카메라 앵글', q:`카메라 렌즈를 피사체의 눈높이에 맞추어 가장 자연스럽게 담아내는 앵글은? (한국어 5글자)`, a:['아이레벨샷','아이레벨 샷','아이 레벨 샷','아이레벨'], exp:`가장 일상적이고 객관적인 시점을 제공합니다.` },
+                { id:'s2', cat:'편집', q:`카메라가 인물 사이의 가상의 선을 넘지 않도록 하여 관객의 공간적 혼란(좌우반전)을 막는 체계는? (숫자 포함 5글자)`, a:['180도체계','180도 체계','180도규칙','180도 규칙'], exp:`투명한 연속 편집을 위한 핵심 규칙입니다.` },
+                { id:'s3', cat:'편집', q:`연속 편집 중 앞 샷의 행동과 다음 샷의 행동을 부드럽게 이어붙이는 편집은? (OO의 일치)`, a:['동작의일치','동작의 일치','행동의일치'], exp:`동작이 물 흐르듯 이어지게 만들어 편집을 인지하지 못하게 합니다.` },
+                { id:'s4', cat:'카메라 움직임', q:`카메라의 축은 고정된 상태에서 렌즈가 '좌우'로 고개를 돌리듯 움직이는 기법은?`, a:['팬','패닝','pan','panning'], exp:`상하로 움직이는 것은 틸트(Tilt)입니다.` },
+                { id:'s5', cat:'화면 전환', q:`앞 샷이 사라지며 다음 샷이 나타나, 두 이미지가 다중 노출처럼 겹쳐서 전환되는 기법은?`, a:['디졸브','dissolve','디졸브 기법'], exp:`시간의 경과나 감정의 융합을 표현할 때 쓰입니다.` },
+                { id:'s6', cat:'사운드', q:`[빈칸 채우기] 음량의 크기나 반사음 조절을 통해 사운드의 원근감과 거리감을 표현하는 기법을 음향 OOO (이)라고 한다.`, a:['원근법'], exp:`직접음과 반사음의 비율로 소리의 거리를 지각하게 합니다.` },
+                { id:'s7', cat:'카메라 움직임', q:`촬영자가 장비를 몸에 착용하여 흔들림 없이 부드럽게 걷거나 뛰며 이동하는 촬영 기법은?`, a:['스테디캠','스테디 캠','steadicam'], exp:`스테디캠은 유려하고 안정적인 이동을 가능하게 합니다.` },
+                { id:'s8', cat:'사운드', q:`이야기 세계 내부에서 발생해 극 중 등장인물들도 들을 수 있는 소리를 무슨 사운드라고 하는가?`, a:['내재적사운드','내재적 사운드','다이제틱사운드','다이제틱 사운드'], exp:`이야기 세계 내부에 음원이 존재하는 사운드입니다.` }
             ],
             essay: [
                 // 서술형 1번 다중 시나리오
@@ -400,18 +368,18 @@
                   model:`이 샷은 중앙에 위치한 30대 남성이 회색 양복을 입은 채 정면을 똑바로 응시하고 있는 모습을 담고 있습니다. 인물의 뒤로는 창문과 좌석이 보여 비행기 내부가 배경임을 알 수 있습니다. 카메라는 인물의 가슴과 얼굴을 꽉 차게 담아내는 클로즈업 샷 사이즈이며, 인물의 눈높이에 맞춘 아이 레벨 앵글로 촬영되었습니다. 조명은 화면의 우측 창문 방향에서 주광이 들어와 인물의 눈 밑과 코 주변에 짙은 그림자를 형성하고 있습니다.` },
                 { id:'e1_B', type:1, cat:'서술형 1번 (샷 분석)', 
                   q:`[가상 스틸컷 B]\n"비가 오는 캄캄하고 좁은 골목길. 화면 중앙에 노란 우비를 쓴 어린아이가 혼자 서 있다. 카메라는 건물 위층 높이에서 아이를 아주 멀리서 내려다본다. 빛은 아이 머리 위 가로등에서 수직으로 떨어져 우산만 밝게 비춘다."\n\n교수님의 기준에 맞춰 서술하시오.`, 
-                  rubrics:['"무서워 보인다", "외롭다" 등의 주관적 감상이나 의미 부여를 배제했는가?','키워드 나열이 아닌 문장으로 작성했는가?','인물, 배경, 익스트림 롱 샷, 하이 앵글, 로우키 조명 등의 핵심 구성 요소가 포함되었는가?'], 
-                  model:`화면의 중앙에는 노란색 우비를 입은 어린아이가 덩그러니 서 있습니다. 아이의 주변으로는 비에 젖은 어둡고 좁은 골목길이 배경으로 넓게 펼쳐져 있습니다. 이 샷은 인물이 위치한 공간적 상황을 한눈에 보여주는 익스트림 롱 샷(또는 롱 샷) 크기로 담아내고 있으며, 카메라는 피사체를 높은 곳에서 내려다보는 하이 앵글로 촬영되었습니다. 조명은 화면 위쪽 가로등에서 수직으로 떨어져 아이의 우산 부위만 밝게 비추고 있으며, 전체적으로 명암 대비가 극명한 어두운 로우키 톤을 띠고 있습니다.` },
+                  rubrics:['"무서워 보인다", "외롭다" 등의 주관적 감상이나 의미 부여를 배제했는가?','키워드 나열이 아닌 완전한 문장으로 작성했는가?','인물, 배경, 익스트림 롱 샷, 하이 앵글, 로우키 조명 등의 핵심 구성 요소가 포함되었는가?'], 
+                  model:`화면의 중앙에는 노란색 우비를 입은 어린아이가 덩그러니 서 있습니다. 아이의 주변으로는 비에 젖은 어둡고 좁은 골목길이 배경으로 넓게 펼쳐져 있습니다. 이 샷은 인물이 위치한 공간적 상황을 한눈에 보여주는 익스트림 롱 샷 크기로 담아내고 있으며, 카메라는 피사체를 높은 곳에서 내려다보는 하이 앵글로 촬영되었습니다. 조명은 화면 위쪽 가로등에서 수직으로 떨어져 아이의 우산 부위만 밝게 비추고 있으며, 전체적으로 명암 대비가 극명한 어두운 로우키 톤을 띠고 있습니다.` },
                 
                 // 서술형 2번 고정
                 { id:'e2', type:2, cat:'서술형 2번 (몽타주 정의)', 
                   q:`몽타주의 세 가지 정의(프랑스, 미국/할리우드, 소비에트/러시아)를 서술하시오.\n(반드시 교수님이 제시한 분량 및 작성 규칙을 엄격히 지킬 것)`, 
                   rubrics:['프랑스, 미국, 소비에트 세 국가의 몽타주 개념이 모두 포함되었는가?','[핵심 절대 규칙] 길게 나열하지 않고 "각각 한 문장씩, 총 세 문장으로만" 정확히 압축하여 작성했는가?'], 
-                  model:`1. 프랑스 영화에서 몽타주란 샷과 샷을 결합하는 단순한 편집의 조립 그 자체를 의미합니다.\n2. 미국(할리우드) 영화에서 몽타주란 내러티브 전개를 위해 시공간을 압축하거나 확장하여 보여주는 편집 시퀀스를 지칭합니다.\n3. 소비에트(러시아) 영화에서 몽타주란 독립된 샷들의 변증법적 충돌을 통해 관객의 마음속에 새롭고 혁명적인 의미를 창조해내는 것을 뜻합니다.` },
+                  model:`프랑스 영화에서 몽타주란 샷과 샷을 결합하는 단순한 편집의 조립 그 자체를 의미합니다. 미국(할리우드) 영화에서 몽타주란 내러티브 전개를 위해 시공간을 압축하거나 확장하여 보여주는 편집 시퀀스를 지칭합니다. 소비에트(러시아) 영화에서 몽타주란 독립된 샷들의 변증법적 충돌을 통해 관객의 마음속에 새롭고 혁명적인 의미를 창조해내는 것을 뜻합니다.` },
                 
                 // 서술형 3번 다중 시나리오
                 { id:'e3_A', type:3, cat:'서술형 3번 (편집 상상력)', 
-                  q:`[상상력 시나리오 A]\n당신은 영화감독입니다. '텅 빈 방에 서서 창밖을 불안하게 바라보는 남자의 뒷모습' 샷이 주어졌습니다. 이 남자가 느끼는 '극심한 혼란과 세상에 대한 무기력함'을 표현하기 위해 어떤 샷을 이어 붙일지 교재(2A, 2B) 형식으로 묘사하고, 그 연출적 의도를 서술하시오.`, 
+                  q:`[상상력 시나리오 A]\n당신은 영화감독입니다. '텅 빈 방에 서서 창밖을 불안하게 바라보는 남자의 뒷모습' 샷이 주어졌습니다. 이 남자가 느끼는 '극심한 혼란과 세상에 대한 무기력함'을 표현하기 위해 어떤 샷을 이어 붙일지 묘사하고, 그 연출적 의도를 서술하시오.`, 
                   rubrics:['이어붙일 샷의 거리 크기와 카메라 앵글을 명확히 제시했는가? (예: 익스트림 롱 샷, 로우 앵글)','[핵심 감점 요인] 단순히 샷만 묘사하지 않고, "왜 그렇게 샷을 붙였는지에 대한 의도(이유)"를 반드시 서술했는가?','두 샷 간의 시각적 대조나 충돌을 논리적으로 설명했는가?'], 
                   model:`[이어질 샷] 건물 바깥 외부에서 남자가 서 있는 창문을 올려다보는 매우 높은 로우 앵글의 익스트림 롱 샷을 연결하여 배치하겠습니다.\n\n[연출 의도] 이렇게 샷을 편집한 의도(이유)는, 텅 빈 방 안의 모습 직후에 압도적으로 거대한 건물 외벽과 그 속에 점처럼 아주 작게 고립된 남자의 모습을 극명하게 대조시키기 위함입니다. 이를 통해 현재 주인공이 겪고 있는 극심한 심리적 혼란과 세상 앞에서의 무기력함을 관객에게 시각적으로 극대화하여 전달하고자 이 편집을 선택했습니다.` },
                 { id:'e3_B', type:3, cat:'서술형 3번 (편집 상상력)', 
@@ -422,12 +390,13 @@
         };
 
         // --- 전역 상태 변수 ---
-        let examPaper = [];
-        let wrongIds = new Set();
-        let isSubmitted = false;
+        let currentExamPaper = [];
+        let userAnswersData = {};
+        let wrongQuestionsSet = new Set();
+        let hasSubmitted = false;
 
         // --- 유틸리티 함수 ---
-        function shuffle(array) { 
+        function shuffleArray(array) { 
             return array.sort(() => Math.random() - 0.5); 
         }
         
@@ -440,17 +409,17 @@
             setTimeout(() => toast.remove(), 2800);
         }
 
-        // --- 네비게이션 처리 ---
+        // --- 네비게이션 시스템 ---
         function navigate(targetId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.getElementById(targetId).classList.add('active');
 
             document.querySelectorAll('.nav-btn').forEach(el => {
-                el.classList.remove('active', 'bg-indigo-50/30', 'text-indigo-800');
+                el.classList.remove('active', 'bg-indigo-50/50', 'text-indigo-800');
                 if(el.dataset.target === targetId) {
                     el.classList.add('active');
                 } else if (el.dataset.target === 'exam') {
-                    el.classList.add('bg-indigo-50/30');
+                    el.classList.add('bg-indigo-50/50');
                     el.querySelector('span').classList.add('text-indigo-800');
                 }
             });
@@ -466,10 +435,10 @@
             document.getElementById('main-scroll').scrollTo(0, 0);
         }
 
-        // --- 완벽 자료실 렌더링 ---
+        // --- 자료실 렌더링 ---
         function renderLibrary() {
             const container = document.getElementById('library-list');
-            if(container.innerHTML) return; 
+            if(container.innerHTML !== '') return; 
             
             let html = '';
             libraryData.forEach(section => {
@@ -481,7 +450,7 @@
                 section.items.forEach(item => {
                     html += `
                         <li class="flex flex-col gap-1.5">
-                            <span class="text-slate-500 text-xs font-bold bg-slate-100 w-max px-2 py-0.5 rounded">개념</span>
+                            <span class="text-slate-500 text-[11px] font-bold bg-slate-100 w-max px-2 py-0.5 rounded">개념</span>
                             <span class="text-slate-800 font-bold text-[0.95rem] leading-snug">${item.q}</span>
                             <span class="text-indigo-600 font-black text-[0.95rem] mt-1 pl-3 border-l-2 border-indigo-400">A. ${item.a}</span>
                         </li>
@@ -492,43 +461,43 @@
             container.innerHTML = html;
         }
 
-        // --- 모의고사 출제 ---
+        // --- 모의고사 출제 및 렌더링 ---
         function startExam(mode) {
             window.scrollTo(0, 0);
             document.getElementById('exam-intro').classList.add('hidden');
             document.getElementById('exam-paper').classList.remove('hidden');
             document.getElementById('submit-exam-btn').classList.remove('hidden');
             
-            isSubmitted = false;
-            examPaper = [];
+            hasSubmitted = false;
+            userAnswersData = {};
+            currentExamPaper = [];
 
             if(mode === 'normal') {
                 // 실전 모드: 객관식 3 + 단답형 3 + 서술형 3(1,2,3 각 한개씩 랜덤 보장)
-                examPaper.push(...shuffle([...examDB.mcq]).slice(0, 3));
-                examPaper.push(...shuffle([...examDB.short]).slice(0, 3));
+                currentExamPaper.push(...shuffleArray([...examDB.mcq]).slice(0, 3));
+                currentExamPaper.push(...shuffleArray([...examDB.short]).slice(0, 3));
                 
-                const e1 = shuffle(examDB.essay.filter(x => x.type === 1))[0];
-                const e2 = shuffle(examDB.essay.filter(x => x.type === 2))[0];
-                const e3 = shuffle(examDB.essay.filter(x => x.type === 3))[0];
-                examPaper.push(e1, e2, e3);
+                const e1 = shuffleArray(examDB.essay.filter(x => x.type === 1))[0];
+                const e2 = shuffleArray(examDB.essay.filter(x => x.type === 2))[0];
+                const e3 = shuffleArray(examDB.essay.filter(x => x.type === 3))[0];
+                currentExamPaper.push(e1, e2, e3);
             } else {
                 // 오답 모드
-                examPaper = [...wrongIds].map(id => {
+                currentExamPaper = [...wrongQuestionsSet].map(id => {
                     return examDB.mcq.find(x=>x.id===id) || examDB.short.find(x=>x.id===id) || examDB.essay.find(x=>x.id===id);
                 }).filter(x=>x);
-                examPaper = shuffle(examPaper);
+                currentExamPaper = shuffleArray(currentExamPaper);
             }
 
-            document.getElementById('exam-total-count').innerText = examPaper.length;
-            renderExam();
+            document.getElementById('exam-total-count').innerText = currentExamPaper.length;
+            renderExamQuestions();
         }
 
-        // --- 모의고사 렌더링 ---
-        function renderExam() {
+        function renderExamQuestions() {
             const container = document.getElementById('exam-questions');
             let html = '';
             
-            examPaper.forEach((q, idx) => {
+            currentExamPaper.forEach((q, idx) => {
                 let typeStr = q.id.startsWith('m') ? '객관식' : q.id.startsWith('s') ? '단답형' : '서술형';
                 let iconStr = q.id.startsWith('e') ? '✍️' : '🧠';
                 
@@ -539,7 +508,7 @@
                             <span class="text-3xl font-black text-slate-300 mr-4 w-8 text-right">${idx + 1}.</span>
                             <div class="flex-1">
                                 <div class="mb-3">
-                                    <span class="text-[11px] font-black bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full uppercase tracking-wider">${iconStr} ${typeStr} | ${q.cat}</span>
+                                    <span class="text-[11px] font-black bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full tracking-wider">${iconStr} ${typeStr} | ${q.cat}</span>
                                 </div>
                                 <h4 class="text-[1.1rem] font-bold text-slate-800 leading-loose whitespace-pre-wrap">${q.q}</h4>
                             </div>
@@ -574,18 +543,18 @@
             container.innerHTML = html;
         }
 
-        // --- 모의고사 제출 및 DOM 데이터 수집 ---
+        // --- 제출 및 채점 (유효성 강화) ---
         function submitExam() {
-            if(!confirm('시험지를 제출하시겠습니까? 서술형은 교수님 루브릭에 따라 스스로 자가 채점을 진행합니다.')) return;
+            if(!confirm('시험지를 제출하시겠습니까? 객관식/단답은 자동 채점되며, 서술형은 스스로 자가 채점합니다.')) return;
             
-            isSubmitted = true;
+            hasSubmitted = true;
             document.getElementById('submit-exam-btn').classList.add('hidden');
 
-            examPaper.forEach(q => {
+            currentExamPaper.forEach(q => {
                 const fbDiv = document.getElementById(`fb-${q.id}`);
                 let uAns = null;
 
-                // 답안 가져오기 및 입력 비활성화
+                // DOM에서 실시간으로 값 수집 및 비활성화
                 if (q.id.startsWith('m')) {
                     const checkedNode = document.querySelector(`input[name="ans_${q.id}"]:checked`);
                     uAns = checkedNode ? checkedNode.value : null;
@@ -596,7 +565,7 @@
                     if(inputNode) inputNode.disabled = true;
                 }
 
-                // 객관식 & 단답형 자동 채점
+                // 채점 로직
                 if (q.id.startsWith('m') || q.id.startsWith('s')) {
                     let isCorrect = false;
                     if (q.id.startsWith('m')) {
@@ -606,8 +575,8 @@
                         isCorrect = q.a.some(ans => ans.replace(/\s/g, '').toLowerCase() === val);
                     }
 
-                    if(isCorrect) wrongIds.delete(q.id);
-                    else wrongIds.add(q.id);
+                    if(isCorrect) wrongQuestionsSet.delete(q.id);
+                    else wrongQuestionsSet.add(q.id);
 
                     fbDiv.innerHTML = `
                         <div class="p-5 rounded-xl border-2 ${isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'}">
@@ -622,7 +591,7 @@
                         </div>`;
                     fbDiv.classList.remove('hidden');
                 } 
-                // 서술형 자가 채점 루브릭 표시
+                // 서술형 자가 채점
                 else if (q.id.startsWith('e')) {
                     let rubricsHtml = q.rubrics.map(r => `
                         <li class="flex items-start gap-3">
@@ -631,7 +600,7 @@
                         </li>`).join('');
                     
                     fbDiv.innerHTML = `
-                        <div class="p-6 rounded-2xl border-2 border-indigo-400 bg-indigo-50/50 shadow-sm">
+                        <div class="p-6 rounded-2xl border-2 border-indigo-400 bg-indigo-50 shadow-sm">
                             <h4 class="font-black text-indigo-900 mb-4 flex items-center gap-2 text-lg">👨‍🏫 교수님 채점 기준표 (루브릭)</h4>
                             <ul class="space-y-3 mb-6 text-[0.95rem] font-bold text-slate-700 bg-white p-5 rounded-xl border border-indigo-100 shadow-sm">${rubricsHtml}</ul>
                             
@@ -643,31 +612,30 @@
                             <div class="text-center pt-6 border-t border-indigo-200" id="eval-${q.id}">
                                 <p class="font-black text-slate-800 mb-4">본인이 작성한 글이 위 기준을 모두 통과했습니까?</p>
                                 <div class="flex gap-3 justify-center">
-                                    <button onclick="evalEssay('${q.id}', false)" class="flex-1 g-btn-outline !border-rose-300 !text-rose-600 hover:!bg-rose-50 !py-4">감점 요소가 있습니다 (오답 처리)</button>
-                                    <button onclick="evalEssay('${q.id}', true)" class="flex-1 g-btn-primary !bg-indigo-600 !py-4">네, 완벽합니다 (정답 처리)</button>
+                                    <button onclick="evaluateEssay('${q.id}', false)" class="flex-1 btn-outline !border-rose-300 !text-rose-600 hover:!bg-rose-50 !py-4 shadow-sm">감점 요소가 있습니다 (오답)</button>
+                                    <button onclick="evaluateEssay('${q.id}', true)" class="flex-1 btn-primary !bg-indigo-600 !py-4 shadow-sm">네, 완벽합니다 (정답)</button>
                                 </div>
                             </div>
                         </div>`;
                     fbDiv.classList.remove('hidden');
                 }
             });
-            updateNoteCount();
-            showToast('채점이 완료되었습니다. 스크롤을 내려 서술형을 직접 채점해주세요!', 'success');
+            updateNoteState();
+            showToast('채점이 완료되었습니다. 스크롤을 내려 서술형을 직접 평가해주세요!', 'success');
         }
 
-        // 서술형 평가 반영
-        function evalEssay(qId, isCorrect) {
-            if(isCorrect) wrongIds.delete(qId);
-            else wrongIds.add(qId);
-            updateNoteCount();
+        function evaluateEssay(qId, isCorrect) {
+            if(isCorrect) wrongQuestionsSet.delete(qId);
+            else wrongQuestionsSet.add(qId);
+            updateNoteState();
 
             document.getElementById(`eval-${qId}`).innerHTML = `
-                <div class="font-black text-lg p-3 rounded-lg ${isCorrect ? 'text-emerald-700 bg-emerald-100' : 'text-rose-700 bg-rose-100'}">
+                <div class="font-black text-lg p-4 rounded-xl ${isCorrect ? 'text-emerald-700 bg-emerald-100' : 'text-rose-700 bg-rose-100'}">
                     ${isCorrect ? '✅ 스스로 정답 처리했습니다. 훌륭합니다!' : '❌ 스스로 오답 처리했습니다. 약점 오답노트에서 복습하세요.'}
                 </div>`;
         }
 
-        // --- 서술형 3번 마스터 빌더 로직 ---
+        // --- 서술형 빌더 로직 ---
         function buildEssay3() {
             const s1 = document.getElementById('b-step1').value.trim();
             const s2 = document.getElementById('b-step2').value.trim();
@@ -683,12 +651,11 @@
 
         function copyBuilderResult() {
             const text = document.getElementById('b-result').textContent;
-            if(text.includes('좌측의 1단계와')) { 
+            if(text.includes('좌측의 1단계와 2단계를')) { 
                 showToast('먼저 답안을 병합해주세요.', 'error'); 
                 return; 
             }
             
-            // 범용 클립보드 복사 처리
             const ta = document.createElement('textarea');
             ta.value = text; 
             document.body.appendChild(ta);
@@ -699,40 +666,37 @@
         }
 
         // --- 약점 오답노트 로직 ---
-        function updateNoteCount() {
-            const c = wrongIds.size;
+        function updateNoteState() {
+            const c = wrongQuestionsSet.size;
             document.getElementById('note-count').textContent = c;
             const btn = document.getElementById('review-exam-btn');
             if(btn) {
-                if(c > 0) {
-                    btn.classList.remove('hidden');
-                } else {
-                    btn.classList.add('hidden');
-                }
+                if(c > 0) btn.classList.remove('hidden');
+                else btn.classList.add('hidden');
             }
         }
 
         function renderNote() {
-            updateNoteCount();
+            updateNoteState();
             const container = document.getElementById('note-list');
-            if(wrongIds.size === 0) {
+            if(wrongQuestionsSet.size === 0) {
                 container.innerHTML = `
-                    <div class="flex flex-col items-center justify-center h-full py-20 text-slate-400">
+                    <div class="flex flex-col items-center justify-center py-20 text-slate-400 bg-white rounded-xl border border-slate-200 shadow-sm">
                         <span class="text-4xl mb-4">🎉</span>
-                        <p class="font-bold text-lg">기록된 오답이 없습니다.<br>완벽하게 마스터하셨습니다!</p>
+                        <p class="font-bold text-lg text-center">기록된 오답이 없습니다.<br>완벽하게 마스터하셨습니다!</p>
                     </div>`;
                 return;
             }
 
             container.innerHTML = '';
-            [...wrongIds].forEach(id => {
+            [...wrongQuestionsSet].forEach(id => {
                 const q = examDB.mcq.find(x=>x.id===id) || examDB.short.find(x=>x.id===id) || examDB.essay.find(x=>x.id===id);
                 container.innerHTML += `
                     <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative overflow-hidden hover:shadow-md transition">
                         <div class="absolute left-0 top-0 w-1 h-full bg-rose-500"></div>
                         <div class="flex justify-between items-start mb-3">
-                            <h4 class="font-bold text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded uppercase tracking-wider">${q.cat}</h4>
-                            <button onclick="removeWrong('${id}')" class="text-[11px] font-black text-rose-500 hover:text-white hover:bg-rose-500 px-3 py-1.5 rounded transition border border-rose-500">마스터 완료 (삭제)</button>
+                            <h4 class="font-bold text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded tracking-wider">${q.cat}</h4>
+                            <button onclick="removeWrongItem('${id}')" class="text-[11px] font-black text-rose-500 hover:text-white hover:bg-rose-500 px-3 py-1.5 rounded transition border border-rose-500">마스터 완료 (삭제)</button>
                         </div>
                         <p class="text-slate-800 font-bold text-[0.95rem] mb-4 whitespace-pre-wrap leading-relaxed">${q.q}</p>
                         <div class="bg-slate-50 p-4 rounded-lg text-sm text-slate-600 border border-slate-100">
@@ -743,8 +707,8 @@
             });
         }
 
-        function removeWrong(id) {
-            wrongIds.delete(id);
+        function removeWrongItem(id) {
+            wrongQuestionsSet.delete(id);
             renderNote();
             showToast('오답 노트에서 제거되었습니다.', 'success');
         }
@@ -752,7 +716,7 @@
         // --- 초기화 ---
         window.onload = () => { 
             renderLibrary(); 
-            updateNoteCount(); 
+            updateNoteState(); 
         };
     </script>
 </body>
