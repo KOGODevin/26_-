@@ -16,9 +16,9 @@
         }
         
         /* 탭 애니메이션 */
-        .tab-content { display: none; animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .tab-content { display: none; animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
         /* 토스트 알림 */
         #toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
@@ -29,10 +29,8 @@
         @keyframes slideUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 
-        /* 라디오 버튼 커스텀 */
+        /* 커스텀 UI */
         input[type="radio"]:checked + span { font-weight: 800; color: #4338ca; }
-        
-        /* 네비게이션 스타일 */
         .nav-btn.active { background-color: #e0e7ff; color: #3730a3; font-weight: 800; border-right: 4px solid #4f46e5; }
         .nav-btn.active svg { stroke: #4f46e5; }
         .mobile-nav-btn.active { color: #4f46e5; font-weight: 800; }
@@ -59,13 +57,13 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> 대시보드
             </button>
             <button onclick="navigate('library')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-semibold" data-target="library">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg> 완벽 자료실 (정답지)
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg> 완벽 자료실
             </button>
             <button onclick="navigate('exam')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-semibold bg-indigo-50/30" data-target="exam">
                 <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg> <span class="text-indigo-700 font-bold">실전 모의고사 (3+3+3)</span>
             </button>
             <button onclick="navigate('builder')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-semibold" data-target="builder">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg> 서술형 3번 전용 빌더
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg> 서술형 3번 빌더
             </button>
             <hr class="my-4 border-slate-200 mx-6">
             <button onclick="navigate('note')" class="nav-btn w-full flex items-center gap-4 px-6 py-4 transition text-slate-500 font-semibold" data-target="note">
@@ -87,9 +85,9 @@
             <!-- 1. HOME 대시보드 -->
             <section id="home" class="tab-content active max-w-4xl mx-auto">
                 <div class="mb-8">
-                    <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-xs">업데이트 완료</span>
+                    <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-xs">오류 수정 및 유효성 검증 완료</span>
                     <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-4 mb-3">무한 반복 실전 시스템</h2>
-                    <p class="text-slate-600 font-medium">제공해주신 모든 키워드와 양방향 출제 원칙이 적용되었습니다.</p>
+                    <p class="text-slate-600 font-medium">제공해주신 모든 키워드와 양방향 교차 출제 원칙이 적용되었습니다.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -124,7 +122,7 @@
                 </div>
             </section>
 
-            <!-- 2. 완벽 자료실 (Cheat Sheet) -->
+            <!-- 2. 완벽 자료실 (Library) -->
             <section id="library" class="tab-content max-w-5xl mx-auto">
                 <div class="mb-8 border-b border-slate-200 pb-4">
                     <h2 class="text-3xl font-black text-slate-900">완벽 자료실 (핵심 요약)</h2>
@@ -155,7 +153,7 @@
                         <h2 class="text-2xl font-black text-slate-800 border-b border-slate-100 pb-4 mb-4">영화학개론 중간고사</h2>
                         <div class="flex justify-between text-sm text-slate-500 font-bold">
                             <span>과목: 영상영화학 전공필수</span>
-                            <span>총 9문항 (객관식3, 단답형3, 서술형3)</span>
+                            <span>총 <span id="total-q-count">9</span>문항</span>
                         </div>
                     </div>
                     
@@ -202,9 +200,7 @@
                         <h3 class="text-xl font-black text-white mb-4 border-b border-slate-700 pb-4 flex items-center gap-2">
                             <span class="text-indigo-400">📝</span> 완성된 모범 답안
                         </h3>
-                        <div id="b-result" class="flex-1 overflow-y-auto whitespace-pre-wrap leading-loose text-slate-300 font-medium p-2">
-                            좌측의 1단계와 2단계를 작성하고 '병합하기' 버튼을 누르면 이 곳에 논리적으로 조립된 서술형 답안이 완성됩니다.
-                        </div>
+                        <div id="b-result" class="flex-1 overflow-y-auto whitespace-pre-wrap leading-loose text-slate-300 font-medium p-2">좌측의 1단계와 2단계를 작성하고 '병합하기' 버튼을 누르면 이 곳에 논리적으로 조립된 서술형 답안이 완성됩니다.</div>
                         <div class="mt-4 pt-4 border-t border-slate-700 text-right">
                             <button onclick="copyBuilder()" class="btn-outline bg-slate-800 text-white border-slate-600 hover:bg-slate-700">답안 복사하기</button>
                         </div>
@@ -253,7 +249,7 @@
     <div id="toast-container"></div>
 
     <script>
-        // --- 제공해주신 텍스트 기반 완벽 자료실 데이터 ---
+        // --- 1. 자료실 전용 데이터 (1:1 매칭용) ---
         const libraryData = [
             { title: "1. 대상과 카메라 거리: 샷의 크기", items: [
                 { q: "공간의 전반적인 상황과 맥락을 한눈에 보여주기 위해 대상을 아주 작게 묘사하는 샷은?", a: "익스트림 롱 샷 (Extreme Long Shot)" },
@@ -311,74 +307,61 @@
             ]}
         ];
 
-        // --- 방대한 양방향 문제 은행 DB ---
-        // (개념->용어, 용어->개념, 비교 분석 등 다양하게 구성)
+        // --- 2. 방대한 양방향 문제 은행 DB (따옴표 오류 제거 완료) ---
         const DB = {
             mcq: [
-                // 개념 -> 용어
-                { id:'m1', cat:'샷의 크기', q:'공간의 전반적인 상황과 맥락을 한눈에 보여주기 위해 대상을 아주 작게 묘사하는 샷은?', opts:['롱 샷','풀 샷','익스트림 롱 샷','미디엄 샷'], a:2, exp:'배경이 압도적으로 강조되어 인물이 점처럼 보입니다.' },
-                { id:'m2', cat:'카메라 앵글', q:'피사체를 아래에서 위로 올려다보며 촬영하여 대상을 거대하거나 위협적으로 보이게 하는 앵글은?', opts:['하이 앵글','아이 레벨 샷','버즈아이 샷','로우 앵글'], a:3, exp:'아래에서 위로 보는 것은 로우 앵글, 위에서 아래로 내려다보는 것은 하이 앵글입니다.' },
-                { id:'m3', cat:'카메라 움직임', q:'카메라 자체가 바닥과 평행하게 물리적으로 이동하며 공간을 관통하여 깊이감을 창조하는 샷은?', opts:['팬(Pan)','트래킹 샷(Tracking Shot)','줌(Zoom)','틸트(Tilt)'], a:1, exp:'줌(Zoom)과 대비되는 진짜 물리적 이동 샷입니다.' },
-                { id:'m4', cat:'조명', q:'피사체 뒤에서 빛을 비추어 윤곽선을 살리고 배경과 분리시키는 조명은?', opts:['주광(Key Light)','보조광(Fill Light)','역광(Backlight)','하이키 조명'], a:2, exp:'역광은 대상을 배경으로부터 돋보이게 입체감을 부여합니다.' },
-                { id:'m5', cat:'사운드', q:'이야기 세계 외부에서 들려와 관객만 들을 수 있는 소리(예: 스코어 배경음악, 전지적 해설)는?', opts:['내재적 사운드','음향 효과','반사 음향','외재적 사운드'], a:3, exp:'등장인물이 들을 수 없는 이야기 밖의 소리입니다.' },
-                { id:'m6', cat:'편집', q:'인물이 프레임 밖을 바라보는 샷 다음에 그 대상(물건/사람)을 보여주는 샷을 붙이는 것은?', opts:['동작의 일치','조형 일치','시선의 일치 (Eyeline match)','180도 체계'], a:2, exp:'바라보는 행위와 대상을 논리적으로 연결합니다.' },
-                
-                // 용어 -> 개념 (설명을 주고 고르기)
-                { id:'m7', cat:'샷의 크기', q:"'클로즈업(Close-up)'의 주된 목적으로 가장 적절한 것은?", opts:['공간의 지리적 맥락을 파악하게 한다.','인물의 얼굴 등 특정 부위를 가득 채워 감정이나 표정 변화를 강조한다.','인물의 발끝부터 머리끝까지 움직임을 보여준다.','일상적인 대화 장면에 가장 자연스럽게 사용된다.'], a:1, exp:'특정 부위를 확대하여 관객의 시선을 집중시킵니다.' },
-                { id:'m8', cat:'조명', q:"'주광(Key Light)'에 대한 설명으로 올바른 것은?", opts:['피사체를 비추는 가장 주된 광원으로 강한 그림자를 형성한다.','그림자를 부드럽게 완화해준다.','피사체의 윤곽선을 살려 배경과 분리시킨다.','화면 전체를 어둡고 무섭게 만든다.'], a:0, exp:'빛의 근원이자 그림자를 필연적으로 생성하는 핵심 조명입니다.' },
-                { id:'m9', cat:'카메라 움직임', q:"'줌(Zoom)' 기법에 대한 설명으로 올바른 것은?", opts:['카메라 자체가 물리적으로 앞뒤로 이동한다.','상하좌우 자유롭게 지지대를 이용해 날아다닌다.','카메라는 고정되어 있으나 가변 초점 렌즈를 이용해 다가가거나 멀어지는 듯한 가짜 움직임을 준다.','인물의 시선을 따라 카메라가 물리적으로 회전한다.'], a:2, exp:'트래킹과 달리 렌즈만 조작하여 공간을 압축(평면화)시킵니다.' },
-                { id:'m10', cat:'사운드', q:"'주관적 음향(Subjective Sound)'이란 무엇인가?", opts:['장면의 환경에서 들리는 배경 소음이다.','대사와 음악을 제외한 인공적 효과음이다.','음량 조절로 사운드의 원근감을 표현하는 것이다.','인물이 무언가에 극도로 집중할 때 주변 소리가 차단되는 등, 인물의 심리 상태를 반영하는 사운드이다.'], a:3, exp:'객관적 현장음이 아닌 인물의 내면 상태를 들려주는 기법입니다.' },
-                
-                // 상대적 차이 비교 (교수님 강조 포인트)
-                { id:'m11', cat:'편집', q:"'교차 편집'과 '평행 편집'의 차이점으로 가장 올바른 것은?", opts:['교차 편집은 동일한 시간대(동시성)의 사건을 번갈아 보여주고, 평행 편집은 서로 다른 시간대의 사건까지 연관성을 지어 보여준다.','교차 편집은 공간이 같고, 평행 편집은 공간이 다르다.','교차 편집은 부드럽게 이어지고, 평행 편집은 거칠게 끊긴다.','교차 편집은 사운드를 쓰고, 평행 편집은 사운드를 쓰지 않는다.'], a:0, exp:'동시성의 유무가 두 편집 기법을 구분하는 핵심입니다.' },
-                { id:'m12', cat:'조명', q:"'하이키 조명'과 '로우키 조명'의 차이로 적절한 것은?", opts:['하이키는 인공광이고 로우키는 자연광이다.','하이키는 그림자가 강해 스릴러에 쓰이고, 로우키는 밝고 화사해 코미디에 쓰인다.','하이키는 그림자가 거의 없어 밝고 화사하며, 로우키는 명암 대비가 강하고 짙은 그림자를 많이 사용하여 긴장감을 준다.','하이키는 메인 조명이고, 로우키는 보조 조명이다.'], a:2, exp:'보조광의 비율에 따라 명암 대비(콘트라스트)가 결정됩니다.' }
+                { id:'m1', cat:'샷의 크기', q:"공간의 전반적인 상황과 맥락을 한눈에 보여주기 위해 대상을 아주 작게 묘사하는 샷은?", opts:['롱 샷','풀 샷','익스트림 롱 샷','미디엄 샷'], a:2, exp:"배경이 압도적으로 강조되어 인물이 점처럼 보입니다." },
+                { id:'m2', cat:'카메라 앵글', q:"피사체를 아래에서 위로 올려다보며 촬영하여 대상을 거대하거나 위협적으로 보이게 하는 앵글은?", opts:['하이 앵글','아이 레벨 샷','버즈아이 샷','로우 앵글'], a:3, exp:"아래에서 위로 보는 것은 로우 앵글, 위에서 아래로 내려다보는 것은 하이 앵글입니다." },
+                { id:'m3', cat:'카메라 움직임', q:"카메라 자체가 바닥과 평행하게 물리적으로 이동하며 공간을 관통하여 깊이감을 창조하는 샷은?", opts:['팬(Pan)','트래킹 샷(Tracking Shot)','줌(Zoom)','틸트(Tilt)'], a:1, exp:"줌(Zoom)과 대비되는 진짜 물리적 이동 샷입니다." },
+                { id:'m4', cat:'조명', q:"피사체 뒤에서 빛을 비추어 윤곽선을 살리고 배경과 분리시키는 조명은?", opts:['주광(Key Light)','보조광(Fill Light)','역광(Backlight)','하이키 조명'], a:2, exp:"역광은 대상을 배경으로부터 돋보이게 입체감을 부여합니다." },
+                { id:'m5', cat:'사운드', q:"이야기 세계 외부에서 들려와 관객만 들을 수 있는 소리(예: 스코어 배경음악, 전지적 해설)는?", opts:['내재적 사운드','음향 효과','반사 음향','외재적 사운드'], a:3, exp:"등장인물이 들을 수 없는 이야기 밖의 소리입니다." },
+                { id:'m6', cat:'편집', q:"인물이 프레임 밖을 바라보는 샷 다음에 그 대상(물건/사람)을 보여주는 샷을 붙이는 것은?", opts:['동작의 일치','조형 일치','시선의 일치 (Eyeline match)','180도 체계'], a:2, exp:"바라보는 행위와 대상을 논리적으로 연결합니다." },
+                { id:'m7', cat:'샷의 크기', q:"'클로즈업(Close-up)'의 주된 목적으로 가장 적절한 것은?", opts:['공간의 지리적 맥락을 파악하게 한다.','인물의 얼굴 등 특정 부위를 가득 채워 감정이나 표정 변화를 강조한다.','인물의 발끝부터 머리끝까지 움직임을 보여준다.','일상적인 대화 장면에 가장 자연스럽게 사용된다.'], a:1, exp:"특정 부위를 확대하여 관객의 시선을 집중시킵니다." },
+                { id:'m8', cat:'조명', q:"'주광(Key Light)'에 대한 설명으로 올바른 것은?", opts:['피사체를 비추는 가장 주된 광원으로 강한 그림자를 형성한다.','그림자를 부드럽게 완화해준다.','피사체의 윤곽선을 살려 배경과 분리시킨다.','화면 전체를 어둡고 무섭게 만든다.'], a:0, exp:"빛의 근원이자 그림자를 필연적으로 생성하는 핵심 조명입니다." },
+                { id:'m9', cat:'카메라 움직임', q:"'줌(Zoom)' 기법에 대한 설명으로 올바른 것은?", opts:['카메라 자체가 물리적으로 앞뒤로 이동한다.','상하좌우 자유롭게 지지대를 이용해 날아다닌다.','카메라는 고정되어 있으나 가변 초점 렌즈를 이용해 다가가거나 멀어지는 듯한 가짜 움직임을 준다.','인물의 시선을 따라 카메라가 물리적으로 회전한다.'], a:2, exp:"트래킹과 달리 렌즈만 조작하여 공간을 압축(평면화)시킵니다." },
+                { id:'m10', cat:'사운드', q:"'주관적 음향(Subjective Sound)'이란 무엇인가?", opts:['장면의 환경에서 들리는 배경 소음이다.','대사와 음악을 제외한 인공적 효과음이다.','음량 조절로 사운드의 원근감을 표현하는 것이다.','인물이 무언가에 극도로 집중할 때 주변 소리가 차단되는 등, 인물의 심리 상태를 반영하는 사운드이다.'], a:3, exp:"객관적 현장음이 아닌 인물의 내면 상태를 들려주는 기법입니다." },
+                { id:'m11', cat:'편집', q:"'교차 편집'과 '평행 편집'의 차이점으로 가장 올바른 것은?", opts:['교차 편집은 동일한 시간대(동시성)의 사건을 번갈아 보여주고, 평행 편집은 서로 다른 시간대의 사건까지 연관성을 지어 보여준다.','교차 편집은 공간이 같고, 평행 편집은 공간이 다르다.','교차 편집은 부드럽게 이어지고, 평행 편집은 거칠게 끊긴다.','교차 편집은 사운드를 쓰고, 평행 편집은 사운드를 쓰지 않는다.'], a:0, exp:"동시성의 유무가 두 편집 기법을 구분하는 핵심입니다." },
+                { id:'m12', cat:'조명', q:"'하이키 조명'과 '로우키 조명'의 차이로 적절한 것은?", opts:['하이키는 인공광이고 로우키는 자연광이다.','하이키는 그림자가 강해 스릴러에 쓰이고, 로우키는 밝고 화사해 코미디에 쓰인다.','하이키는 그림자가 거의 없어 밝고 화사하며, 로우키는 명암 대비가 강하고 짙은 그림자를 많이 사용하여 긴장감을 준다.','하이키는 메인 조명이고, 로우키는 보조 조명이다.'], a:2, exp:"보조광의 비율에 따라 명암 대비(콘트라스트)가 결정됩니다." }
             ],
             short: [
-                // 개념 -> 빈칸/용어
-                { id:'s1', cat:'카메라 앵글', q:'카메라 렌즈를 피사체의 눈높이에 맞추어 가장 자연스럽게 담아내는 앵글은? (띄어쓰기 무관)', a:['아이레벨','아이레벨샷','아이 레벨 샷','eye level'], exp:'가장 일상적이고 객관적인 시점을 제공합니다.' },
-                { id:'s2', cat:'편집', q:'카메라가 인물 사이의 가상의 선을 넘지 않도록 하여 관객의 공간적 혼란(좌우반전)을 막는 체계는? (숫자 포함 5글자)', a:['180도체계','180도 체계','180도규칙','180도 규칙'], exp:'투명한 연속 편집을 위한 핵심 규칙입니다.' },
-                { id:'s3', cat:'편집', q:'연속 편집 중 앞 샷의 행동(예: 문 손잡이 잡기)과 다음 샷의 행동(예: 문 열고 들어오기)을 부드럽게 이어붙이는 편집은? (OO의 일치)', a:['동작의일치','동작의 일치','행동의일치'], exp:'동작이 물 흐르듯 이어지게 만들어 편집을 인지하지 못하게 합니다.' },
-                { id:'s4', cat:'카메라 움직임', q:'카메라의 축은 고정된 상태에서 렌즈가 '좌우'로 고개를 돌리듯 움직이는 기법은?', a:['팬','패닝','pan','panning'], exp:'상하로 움직이는 것은 틸트(Tilt)입니다.' },
-                { id:'s5', cat:'화면 전환', q:'앞 샷이 사라지며 다음 샷이 나타나, 두 이미지가 다중 노출처럼 겹쳐서 전환되는 기법은?', a:['디졸브','dissolve','디졸브 기법'], exp:'시간의 경과나 감정의 융합을 표현할 때 쓰입니다.' },
-                
-                // 용어 -> 빈칸 채우기
-                { id:'s6', cat:'사운드', q:'[빈칸 채우기] "음량의 크기나 반사음 조절을 통해 사운드의 원근감과 거리감을 표현하는 기법을 음향 OOO (이)라고 한다."', a:['원근법'], exp:'직접음과 반사음의 비율로 소리의 거리를 지각하게 합니다.' },
-                { id:'s7', cat:'카메라 움직임', q:'[빈칸 채우기] "촬영자가 장비를 몸에 착용하여 흔들림 없이 부드럽게 이동하는 기법은 OOOO 이고, 직접 손에 들고 찍어 불안정한 느낌을 주는 것은 핸드헬드이다."', a:['스테디캠','스테디 캠','steadicam'], exp:'스테디캠은 유려하고 안정적인 이동을 가능하게 합니다.' }
+                { id:'s1', cat:'카메라 앵글', q:"카메라 렌즈를 피사체의 눈높이에 맞추어 가장 자연스럽게 담아내는 앵글은? (띄어쓰기 무관)", a:['아이레벨','아이레벨샷','아이 레벨 샷','eye level'], exp:"가장 일상적이고 객관적인 시점을 제공합니다." },
+                { id:'s2', cat:'편집', q:"카메라가 인물 사이의 가상의 선을 넘지 않도록 하여 관객의 공간적 혼란(좌우반전)을 막는 체계는? (숫자 포함 5글자)", a:['180도체계','180도 체계','180도규칙','180도 규칙'], exp:"투명한 연속 편집을 위한 핵심 규칙입니다." },
+                { id:'s3', cat:'편집', q:"연속 편집 중 앞 샷의 행동(예: 문 손잡이 잡기)과 다음 샷의 행동(예: 문 열고 들어오기)을 부드럽게 이어붙이는 편집은? (OO의 일치)", a:['동작의일치','동작의 일치','행동의일치'], exp:"동작이 물 흐르듯 이어지게 만들어 편집을 인지하지 못하게 합니다." },
+                { id:'s4', cat:'카메라 움직임', q:"카메라의 축은 고정된 상태에서 렌즈가 '좌우'로 고개를 돌리듯 움직이는 기법은?", a:['팬','패닝','pan','panning'], exp:"상하로 움직이는 것은 틸트(Tilt)입니다." },
+                { id:'s5', cat:'화면 전환', q:"앞 샷이 사라지며 다음 샷이 나타나, 두 이미지가 다중 노출처럼 겹쳐서 전환되는 기법은?", a:['디졸브','dissolve','디졸브 기법'], exp:"시간의 경과나 감정의 융합을 표현할 때 쓰입니다." },
+                { id:'s6', cat:'사운드', q:"[빈칸 채우기] 음량의 크기나 반사음 조절을 통해 사운드의 원근감과 거리감을 표현하는 기법을 음향 OOO (이)라고 한다.", a:['원근법'], exp:"직접음과 반사음의 비율로 소리의 거리를 지각하게 합니다." },
+                { id:'s7', cat:'카메라 움직임', q:"[빈칸 채우기] 촬영자가 장비를 몸에 착용하여 흔들림 없이 부드럽게 이동하는 기법은 OOOO 이고, 직접 손에 들고 찍어 불안정한 느낌을 주는 것은 핸드헬드이다.", a:['스테디캠','스테디 캠','steadicam'], exp:"스테디캠은 유려하고 안정적인 이동을 가능하게 합니다." }
             ],
             essay: [
-                // 서술형 1번 (샷 분석) - 다중 시나리오
                 { id:'e1_A', type:1, cat:'서술형 1번 (샷 분석)', 
-                  q:'[가상 스틸컷 A]\n"비행기 내부. 화면 중앙에 회색 양복을 입은 30대 남성이 앞을 똑바로 응시하고 있다. 카메라는 인물의 얼굴과 가슴을 꽉 차게 눈높이에서 찍었다. 창문이 있는 우측에서 빛이 강하게 들어와 코와 눈 밑에 그림자를 만든다."\n\n교수님의 3가지 채점 기준(해석 금지, 문장 작성, 순서 지정)에 맞춰 서술하시오.', 
+                  q:"[가상 스틸컷 A]\n'비행기 내부. 화면 중앙에 회색 양복을 입은 30대 남성이 앞을 똑바로 응시하고 있다. 카메라는 인물의 얼굴과 가슴을 꽉 차게 눈높이에서 찍었다. 창문이 있는 우측에서 빛이 강하게 들어와 코와 눈 밑에 그림자를 만든다.'\n\n교수님의 3가지 채점 기준(해석 금지, 문장 작성, 순서 지정)에 맞춰 서술하시오.", 
                   rubrics:['주관적 해석이나 상상력을 배제하고 철저히 "눈에 보이는 요소만" 서술했는가?','단어의 나열이 아니라 주어와 서술어를 갖춘 "완전한 문장" 형태인가?','인물 ➡ 배경 ➡ 카메라 크기/앵글 ➡ 조명 등 본인만의 일관된 순서로 묘사했는가?'], 
-                  model:'이 샷은 중앙에 위치한 30대 남성이 회색 양복을 입은 채 정면을 똑바로 응시하고 있는 모습을 담고 있습니다. 인물의 뒤로는 창문과 좌석이 보여 비행기 내부가 배경임을 알 수 있습니다. 카메라는 인물의 가슴과 얼굴을 꽉 차게 담아내는 클로즈업 샷 사이즈이며, 인물의 눈높이에 맞춘 아이 레벨 앵글로 촬영되었습니다. 조명은 화면의 우측 창문 방향에서 주광이 들어와 인물의 눈 밑과 코 주변에 짙은 그림자를 형성하고 있습니다.' },
+                  model:"이 샷은 중앙에 위치한 30대 남성이 회색 양복을 입은 채 정면을 똑바로 응시하고 있는 모습을 담고 있습니다. 인물의 뒤로는 창문과 좌석이 보여 비행기 내부가 배경임을 알 수 있습니다. 카메라는 인물의 가슴과 얼굴을 꽉 차게 담아내는 클로즈업 샷 사이즈이며, 인물의 눈높이에 맞춘 아이 레벨 앵글로 촬영되었습니다. 조명은 화면의 우측 창문 방향에서 주광이 들어와 인물의 눈 밑과 코 주변에 짙은 그림자를 형성하고 있습니다." },
                 { id:'e1_B', type:1, cat:'서술형 1번 (샷 분석)', 
-                  q:'[가상 스틸컷 B]\n"비가 오는 캄캄하고 좁은 골목길. 화면 중앙에 노란 우비를 쓴 어린아이가 혼자 서 있다. 카메라는 건물 위층 높이에서 아이를 아주 멀리서 내려다본다. 빛은 아이 머리 위 가로등에서 수직으로 떨어져 우산만 밝게 비춘다."\n\n교수님의 기준에 맞춰 서술하시오.', 
+                  q:"[가상 스틸컷 B]\n'비가 오는 캄캄하고 좁은 골목길. 화면 중앙에 노란 우비를 쓴 어린아이가 혼자 서 있다. 카메라는 건물 위층 높이에서 아이를 아주 멀리서 내려다본다. 빛은 아이 머리 위 가로등에서 수직으로 떨어져 우산만 밝게 비춘다.'\n\n교수님의 기준에 맞춰 서술하시오.", 
                   rubrics:['"무서워 보인다", "외롭다" 등의 주관적 감상이나 의미 부여를 배제했는가?','키워드 나열이 아닌 문장으로 작성했는가?','인물, 배경, 익스트림 롱 샷, 하이 앵글, 로우키 조명 등의 핵심 구성 요소가 포함되었는가?'], 
-                  model:'화면의 중앙에는 노란색 우비를 입은 어린아이가 덩그러니 서 있습니다. 아이의 주변으로는 비에 젖은 어둡고 좁은 골목길이 배경으로 넓게 펼쳐져 있습니다. 이 샷은 인물이 위치한 공간적 상황을 한눈에 보여주는 익스트림 롱 샷(또는 롱 샷) 크기로 담아내고 있으며, 카메라는 피사체를 높은 곳에서 내려다보는 하이 앵글로 촬영되었습니다. 조명은 화면 위쪽 가로등에서 수직으로 떨어져 아이의 우산 부위만 밝게 비추고 있으며, 전체적으로 명암 대비가 극명한 어두운 로우키 톤을 띠고 있습니다.' },
-                
-                // 서술형 2번 (몽타주 3정의) - 고정 문제
+                  model:"화면의 중앙에는 노란색 우비를 입은 어린아이가 덩그러니 서 있습니다. 아이의 주변으로는 비에 젖은 어둡고 좁은 골목길이 배경으로 넓게 펼쳐져 있습니다. 이 샷은 인물이 위치한 공간적 상황을 한눈에 보여주는 익스트림 롱 샷(또는 롱 샷) 크기로 담아내고 있으며, 카메라는 피사체를 높은 곳에서 내려다보는 하이 앵글로 촬영되었습니다. 조명은 화면 위쪽 가로등에서 수직으로 떨어져 아이의 우산 부위만 밝게 비추고 있으며, 전체적으로 명암 대비가 극명한 어두운 로우키 톤을 띠고 있습니다." },
                 { id:'e2', type:2, cat:'서술형 2번 (몽타주 정의)', 
-                  q:'몽타주의 세 가지 정의(프랑스, 미국/할리우드, 소비에트/러시아)를 서술하시오.\n(반드시 교수님이 제시한 분량 및 작성 규칙을 엄격히 지킬 것)', 
+                  q:"몽타주의 세 가지 정의(프랑스, 미국/할리우드, 소비에트/러시아)를 서술하시오.\n(반드시 교수님이 제시한 분량 및 작성 규칙을 엄격히 지킬 것)", 
                   rubrics:['프랑스, 미국, 소비에트 세 국가의 몽타주 개념이 모두 포함되었는가?','[핵심 절대 규칙] 길게 나열하지 않고 "각각 한 문장씩, 총 세 문장으로만" 정확히 압축하여 작성했는가?'], 
-                  model:'1. 프랑스 영화에서 몽타주란 샷과 샷을 결합하는 단순한 편집의 조립 그 자체를 의미합니다.\n2. 미국(할리우드) 영화에서 몽타주란 내러티브 전개를 위해 시공간을 압축하거나 확장하여 보여주는 편집 시퀀스를 지칭합니다.\n3. 소비에트(러시아) 영화에서 몽타주란 독립된 샷들의 변증법적 충돌을 통해 관객의 마음속에 새롭고 혁명적인 의미를 창조해내는 것을 뜻합니다.' },
-                
-                // 서술형 3번 (편집 상상력) - 다중 시나리오
+                  model:"1. 프랑스 영화에서 몽타주란 샷과 샷을 결합하는 단순한 편집의 조립 그 자체를 의미합니다.\n2. 미국(할리우드) 영화에서 몽타주란 내러티브 전개를 위해 시공간을 압축하거나 확장하여 보여주는 편집 시퀀스를 지칭합니다.\n3. 소비에트(러시아) 영화에서 몽타주란 독립된 샷들의 변증법적 충돌을 통해 관객의 마음속에 새롭고 혁명적인 의미를 창조해내는 것을 뜻합니다." },
                 { id:'e3_A', type:3, cat:'서술형 3번 (편집 상상력)', 
-                  q:'[상상력 시나리오 A]\n당신은 영화감독입니다. "텅 빈 방에 서서 창밖을 불안하게 바라보는 남자의 뒷모습" 샷이 주어졌습니다. 이 남자가 느끼는 "극심한 혼란과 세상에 대한 무기력함"을 표현하기 위해 어떤 샷을 이어 붙일지 교재(2A, 2B) 형식으로 묘사하고, 그 연출적 의도를 서술하시오.', 
+                  q:"[상상력 시나리오 A]\n당신은 영화감독입니다. '텅 빈 방에 서서 창밖을 불안하게 바라보는 남자의 뒷모습' 샷이 주어졌습니다. 이 남자가 느끼는 '극심한 혼란과 세상에 대한 무기력함'을 표현하기 위해 어떤 샷을 이어 붙일지 교재(2A, 2B) 형식으로 묘사하고, 그 연출적 의도를 서술하시오.", 
                   rubrics:['이어붙일 샷의 거리 크기와 카메라 앵글을 명확히 제시했는가? (예: 익스트림 롱 샷, 로우 앵글)','[핵심 감점 요인] 단순히 샷만 묘사하지 않고, "왜 그렇게 샷을 붙였는지에 대한 의도(이유)"를 반드시 서술했는가?','두 샷 간의 시각적 대조나 충돌을 논리적으로 설명했는가?'], 
-                  model:'[이어질 샷] "건물 바깥 외부에서 남자가 서 있는 창문을 올려다보는 매우 높은 로우 앵글의 익스트림 롱 샷"을 연결하여 배치하겠습니다.\n\n[연출 의도] 이렇게 샷을 편집한 의도(이유)는, 텅 빈 방 안의 모습 직후에 압도적으로 거대한 건물 외벽과 그 속에 점처럼 아주 작게 고립된 남자의 모습을 극명하게 대조시키기 위함입니다. 이를 통해 현재 주인공이 겪고 있는 극심한 심리적 혼란과 세상 앞에서의 무기력함을 관객에게 시각적으로 극대화하여 전달하고자 이 편집을 선택했습니다.' },
+                  model:"[이어질 샷] 건물 바깥 외부에서 남자가 서 있는 창문을 올려다보는 매우 높은 로우 앵글의 익스트림 롱 샷을 연결하여 배치하겠습니다.\n\n[연출 의도] 이렇게 샷을 편집한 의도(이유)는, 텅 빈 방 안의 모습 직후에 압도적으로 거대한 건물 외벽과 그 속에 점처럼 아주 작게 고립된 남자의 모습을 극명하게 대조시키기 위함입니다. 이를 통해 현재 주인공이 겪고 있는 극심한 심리적 혼란과 세상 앞에서의 무기력함을 관객에게 시각적으로 극대화하여 전달하고자 이 편집을 선택했습니다." },
                 { id:'e3_B', type:3, cat:'서술형 3번 (편집 상상력)', 
-                  q:'[상상력 시나리오 B]\n당신은 영화감독입니다. "연필을 신경질적으로 쉴 새 없이 돌리고 있는 젊은 여자의 손을 꽉 차게 담은 클로즈업 샷"이 주어졌습니다. 이 여자가 느끼는 "내적 혼란과 세상으로부터의 철저한 소외감"을 표현하기 위해 어떤 샷을 이어 붙일지 상상하여 묘사하고, 그 연출적 의도를 서술하시오.', 
+                  q:"[상상력 시나리오 B]\n당신은 영화감독입니다. '연필을 신경질적으로 쉴 새 없이 돌리고 있는 젊은 여자의 손을 꽉 차게 담은 클로즈업 샷'이 주어졌습니다. 이 여자가 느끼는 '내적 혼란과 세상으로부터의 철저한 소외감'을 표현하기 위해 어떤 샷을 이어 붙일지 상상하여 묘사하고, 그 연출적 의도를 서술하시오.", 
                   rubrics:['이어붙일 샷의 거리 크기와 카메라 앵글을 명확히 제시했는가?','[핵심 감점 요인] "왜 그렇게 샷을 붙였는지에 대한 연출적 의도(이유)"를 반드시 서술했는가?','좁고 답답한 화면(클로즈업)과 대조되는 화면을 충돌시켜 인물의 심리를 표현하려 했는가?'], 
-                  model:'[이어질 샷] "수많은 군중이 빠르고 바쁘게 지나가는 거대한 교차로 한가운데에, 멍하니 홀로 멈춰 서 있는 여자를 아주 높은 곳에서 수직으로 내려다보는 버즈아이 샷(Bird\'s-eye Shot)의 익스트림 롱 샷"을 연결하겠습니다.\n\n[연출 의도] 이렇게 편집한 의도(이유)는 샷의 크기와 피사체 속도감의 극단적인 대조를 통해 인물의 심리를 표현하기 위함입니다. 좁은 프레임 안에서 신경질적으로 움직이는 손의 클로즈업 직후에, 거대하고 낯선 공간에 점처럼 고립된 채 정지해 있는 여자의 익스트림 롱 샷을 충돌시켰습니다. 이를 통해 주변 세상의 속도에 적응하지 못하고 철저히 소외된 주인공의 극심한 정신적 혼란을 관객에게 시각적으로 전달하고자 했습니다.' }
+                  model:"[이어질 샷] 수많은 군중이 빠르고 바쁘게 지나가는 거대한 교차로 한가운데에, 멍하니 홀로 멈춰 서 있는 여자를 아주 높은 곳에서 수직으로 내려다보는 버즈아이 샷(Bird's-eye Shot)의 익스트림 롱 샷을 연결하겠습니다.\n\n[연출 의도] 이렇게 편집한 의도(이유)는 샷의 크기와 피사체 속도감의 극단적인 대조를 통해 인물의 심리를 표현하기 위함입니다. 좁은 프레임 안에서 신경질적으로 움직이는 손의 클로즈업 직후에, 거대하고 낯선 공간에 점처럼 고립된 채 정지해 있는 여자의 익스트림 롱 샷을 충돌시켰습니다. 이를 통해 주변 세상의 속도에 적응하지 못하고 철저히 소외된 주인공의 극심한 정신적 혼란을 관객에게 시각적으로 전달하고자 했습니다." }
             ]
         };
 
+        // --- 전역 변수 ---
         let examPaper = [];
-        let userAnswers = {};
         let wrongIds = new Set();
         let isSubmitted = false;
 
+        // --- 유틸리티 ---
         function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
         
         function showToast(msg, type = 'info') {
@@ -390,7 +373,7 @@
             setTimeout(() => toast.remove(), 2800);
         }
 
-        // 네비게이션 함수
+        // --- 네비게이션 ---
         function navigate(targetId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.getElementById(targetId).classList.add('active');
@@ -415,7 +398,7 @@
             document.getElementById('main-scroll').scrollTo(0, 0);
         }
 
-        // 완벽 자료실 렌더링
+        // --- 완벽 자료실 ---
         function renderLibrary() {
             const container = document.getElementById('library-content');
             if(container.innerHTML) return; 
@@ -431,7 +414,7 @@
             container.innerHTML = html;
         }
 
-        // 모의고사 출제
+        // --- 모의고사 출제 ---
         function startExam(mode) {
             window.scrollTo(0, 0);
             document.getElementById('exam-intro').classList.add('hidden');
@@ -439,15 +422,12 @@
             document.getElementById('submit-exam-btn').classList.remove('hidden');
             
             isSubmitted = false;
-            userAnswers = {};
             examPaper = [];
 
             if(mode === 'normal') {
-                // 객관식 3
+                // 실전 모드: 객관식 3 + 단답형 3 + 서술형 3(1,2,3 각 한개씩 보장)
                 examPaper.push(...shuffle([...DB.mcq]).slice(0, 3));
-                // 주관식 3
                 examPaper.push(...shuffle([...DB.short]).slice(0, 3));
-                // 서술형 3 (유형1, 유형2, 유형3 각각 1개씩 랜덤 보장)
                 examPaper.push(shuffle(DB.essay.filter(x => x.type === 1))[0]);
                 examPaper.push(shuffle(DB.essay.filter(x => x.type === 2))[0]);
                 examPaper.push(shuffle(DB.essay.filter(x => x.type === 3))[0]);
@@ -459,6 +439,7 @@
                 examPaper = shuffle(examPaper);
             }
 
+            document.getElementById('total-q-count').innerText = examPaper.length;
             renderExam();
         }
 
@@ -487,7 +468,7 @@
                     q.opts.forEach((opt, oIdx) => {
                         html += `
                             <label class="flex items-start p-4 border border-slate-200 rounded-xl cursor-pointer hover:bg-indigo-50 hover:border-indigo-300 transition group">
-                                <input type="radio" name="ans_${q.id}" value="${oIdx}" class="mt-1 mr-4 w-4 h-4 text-indigo-600" onchange="saveAns('${q.id}', ${oIdx})">
+                                <input type="radio" name="ans_${q.id}" value="${oIdx}" class="mt-1 mr-4 w-4 h-4 text-indigo-600">
                                 <span class="text-slate-700 text-[0.95rem] font-medium leading-relaxed group-hover:text-indigo-900">${oIdx+1}) ${opt}</span>
                             </label>`;
                     });
@@ -495,12 +476,12 @@
                 } else if (q.id.startsWith('s')) {
                     html += `
                         <div class="pl-12 md:pl-16">
-                            <input type="text" id="ans_${q.id}" class="w-full border-b-2 border-slate-300 p-3 bg-slate-50 focus:bg-white focus:border-indigo-600 focus:outline-none transition text-lg font-bold text-slate-800" placeholder="정답을 입력하세요" onchange="saveAns('${q.id}', this.value)">
+                            <input type="text" id="ans_${q.id}" class="w-full border-b-2 border-slate-300 p-3 bg-slate-50 focus:bg-white focus:border-indigo-600 focus:outline-none transition text-lg font-bold text-slate-800" placeholder="정답을 입력하세요">
                         </div>`;
                 } else if (q.id.startsWith('e')) {
                     html += `
                         <div class="pl-12 md:pl-16">
-                            <textarea id="ans_${q.id}" rows="6" class="w-full border border-slate-300 rounded-xl p-5 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 focus:outline-none transition text-[0.95rem] leading-relaxed font-medium" placeholder="답안을 문장으로 서술하세요..." onchange="saveAns('${q.id}', this.value)"></textarea>
+                            <textarea id="ans_${q.id}" rows="6" class="w-full border border-slate-300 rounded-xl p-5 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 focus:outline-none transition text-[0.95rem] leading-relaxed font-medium" placeholder="답안을 문장으로 서술하세요..."></textarea>
                         </div>`;
                 }
 
@@ -510,29 +491,34 @@
             container.innerHTML = html;
         }
 
-        function saveAns(qId, val) { userAnswers[qId] = val; }
-
-        // 채점 및 피드백
+        // --- 채점 및 피드백 (DOM에서 직접 값 추출) ---
         function submitExam() {
-            if(!confirm('시험지를 제출하시겠습니까? 서술형은 스스로 자가 채점을 진행합니다.')) return;
+            if(!confirm('시험지를 제출하시겠습니까? 서술형은 교수님 루브릭에 따라 자가 채점을 진행합니다.')) return;
             
             isSubmitted = true;
             document.getElementById('submit-exam-btn').classList.add('hidden');
 
             examPaper.forEach(q => {
                 const fbDiv = document.getElementById(`fb-${q.id}`);
-                const uAns = userAnswers[q.id];
+                let uAns = null;
 
-                // 입력 비활성화
-                if(q.id.startsWith('m')) document.getElementsByName(`ans_${q.id}`).forEach(el => el.disabled=true);
-                else document.getElementById(`ans_${q.id}`).disabled = true;
+                // 답안 가져오기 및 입력 비활성화
+                if (q.id.startsWith('m')) {
+                    const checkedNode = document.querySelector(`input[name="ans_${q.id}"]:checked`);
+                    uAns = checkedNode ? checkedNode.value : null;
+                    document.getElementsByName(`ans_${q.id}`).forEach(el => el.disabled = true);
+                } else {
+                    const inputNode = document.getElementById(`ans_${q.id}`);
+                    uAns = inputNode ? inputNode.value : '';
+                    if(inputNode) inputNode.disabled = true;
+                }
 
                 if (q.id.startsWith('m') || q.id.startsWith('s')) {
                     let isCorrect = false;
                     if (q.id.startsWith('m')) {
                         isCorrect = parseInt(uAns) === q.a;
                     } else {
-                        const val = (uAns||'').replace(/\s/g, '').toLowerCase();
+                        const val = (uAns || '').replace(/\s/g, '').toLowerCase();
                         isCorrect = q.a.some(ans => ans.replace(/\s/g, '').toLowerCase() === val);
                     }
 
@@ -549,7 +535,7 @@
                     fbDiv.classList.remove('hidden');
                 } 
                 else if (q.id.startsWith('e')) {
-                    let rubricsHtml = q.rubrics.map(r => `<li class="flex items-start gap-3"><input type="checkbox" class="mt-1.5 w-4 h-4 text-indigo-600 rounded"> <span class="leading-relaxed">${r}</span></li>`).join('');
+                    let rubricsHtml = q.rubrics.map(r => `<li class="flex items-start gap-3"><input type="checkbox" class="mt-1.5 w-4 h-4 text-indigo-600 rounded cursor-pointer"> <span class="leading-relaxed cursor-pointer">${r}</span></li>`).join('');
                     
                     fbDiv.innerHTML = `
                         <div class="p-6 rounded-2xl border-2 border-indigo-400 bg-indigo-50/50 shadow-sm">
@@ -587,7 +573,7 @@
                 </div>`;
         }
 
-        // 빌더 로직
+        // --- 서술형 빌더 로직 ---
         function buildEssay() {
             const s1 = document.getElementById('b-step1').value.trim();
             const s2 = document.getElementById('b-step2').value.trim();
@@ -602,18 +588,17 @@
             const text = document.getElementById('b-result').textContent;
             if(text.includes('좌측의 1단계와')) { showToast('먼저 답안을 병합해주세요.', 'error'); return; }
             
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('완성된 답안이 복사되었습니다.', 'success');
-            }).catch(err => {
-                // Clipboard fallback
-                const ta = document.createElement('textarea');
-                ta.value = text; document.body.appendChild(ta);
-                ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-                showToast('완성된 답안이 복사되었습니다.', 'success');
-            });
+            // 가장 안전한 클립보드 복사 로직 적용
+            const ta = document.createElement('textarea');
+            ta.value = text; 
+            document.body.appendChild(ta);
+            ta.select(); 
+            document.execCommand('copy'); 
+            document.body.removeChild(ta);
+            showToast('완성된 답안이 복사되었습니다.', 'success');
         }
 
-        // 오답노트 로직
+        // --- 오답노트 로직 ---
         function updateNoteCount() {
             const c = wrongIds.size;
             document.getElementById('note-count').textContent = c;
@@ -625,7 +610,7 @@
             updateNoteCount();
             const container = document.getElementById('note-list');
             if(wrongIds.size === 0) {
-                container.innerHTML = '<div class="text-center text-slate-400 py-20 font-bold bg-white rounded-2xl border border-slate-200">기록된 오답이 없습니다.<br>완벽하게 마스터하셨습니다! 🎉</div>';
+                container.innerHTML = '<div class="text-center text-slate-400 py-20 font-bold bg-white rounded-2xl border border-slate-200 shadow-sm">기록된 오답이 없습니다.<br>완벽하게 마스터하셨습니다! 🎉</div>';
                 return;
             }
 
@@ -648,7 +633,7 @@
             });
         }
 
-        // 초기화
+        // --- 초기화 ---
         window.onload = () => { renderLibrary(); updateNoteCount(); };
     </script>
 </body>
